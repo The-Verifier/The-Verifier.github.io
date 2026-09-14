@@ -1,291 +1,386 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Antar Hossain — Data Executive</title>
+<title>Antar Hossain — NOC Engineer | Data-Driven Network Operations</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-:root{
-  --green:#1a6b4a;--green-dark:#145538;--gold:#e8a838;
-  --ink:#0d1117;--paper:#f7f4ef;--muted:#6b7280;
-  --line:#e2ddd6;--white:#ffffff;
-}
-body{font-family:'DM Sans',Arial,sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;}
-
-/* PAGE SYSTEM */
-.page{display:none;min-height:100vh;}
-.page.active{display:block;}
+body{font-family:'DM Sans',Arial,sans-serif;background:#f7f4ef;color:#0d1117;overflow-x:hidden;}
+.page{display:none;min-height:100vh;}.page.active{display:block;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(247,244,239,0.97);border-bottom:1px solid var(--line);padding:0 20px;height:54px;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo{font-family:’Playfair Display’,serif;font-size:20px;font-weight:900;color:var(--ink);cursor:pointer;text-decoration:none;}
-.nav-logo span{color:#1a6b4a !important;}
-.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px;border:none;background:none;}
-.hamburger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all 0.3s;}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-.mobile-menu{display:none;position:fixed;top:54px;left:0;right:0;bottom:0;z-index:998;background:rgba(247,244,239,0.99);flex-direction:column;padding:24px 20px;gap:0;overflow-y:auto;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{font-size:16px;font-weight:600;color:var(--ink);text-decoration:none;padding:13px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;cursor:pointer;}
-.mobile-menu a:hover{color:var(--green);}
-.menu-sec{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:14px 0 4px;}
-.desk-links{display:none;gap:20px;list-style:none;}
-.desk-links a{font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;text-decoration:none;}
-.desk-links a:hover{color:var(--green);}
-@media(min-width:768px){.hamburger{display:none;}.desk-links{display:flex;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;background:#f7f4ef;border-bottom:1px solid #e2ddd6;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#0d1117;cursor:pointer;}
+.nav-logo span{color:#1a6b4a;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+
+/* Auth button in nav */
+.nav-auth-btn{background:#1a6b4a;color:#ffffff;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;}
+
+/* Hamburger */
+.ham{display:flex;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.ham span{width:22px;height:2px;background:#0d1117;border-radius:2px;display:block;transition:all 0.3s;}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+
+/* Mobile menu */
+.mmenu{display:none;position:fixed;top:54px;left:0;right:0;bottom:0;z-index:998;background:#f7f4ef;flex-direction:column;padding:16px;overflow-y:auto;}
+.mmenu.open{display:flex;}
+.mmenu a{font-size:15px;font-weight:600;color:#0d1117;text-decoration:none;padding:12px 8px;border-bottom:1px solid #e2ddd6;cursor:pointer;display:block;}
+.mmenu a:hover{color:#1a6b4a;}
+.mmenu-sec{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6b7280;padding:14px 8px 4px;}
+
+/* User avatar */
+.uavatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;cursor:pointer;position:relative;flex-shrink:0;}
+.udropdown{display:none;position:absolute;top:42px;right:0;background:#fff;border:1px solid #e2ddd6;border-radius:10px;padding:8px;min-width:180px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:100;}
+.udropdown.open{display:block;}
+.uname{padding:8px 12px;border-bottom:1px solid #e2ddd6;margin-bottom:4px;}
+.uname-main{font-weight:700;font-size:14px;color:#0d1117;}
+.uname-role{font-size:11px;color:#6b7280;}
+.umenu-item{padding:10px 12px;cursor:pointer;font-size:13px;font-weight:500;color:#0d1117;border-radius:6px;}
+.umenu-item:hover{background:#f7f4ef;}
+.umenu-item.red{color:#b71c1c;}
+.umenu-item.red:hover{background:#fff5f5;}
+
+/* Desktop links */
+.dlinks{display:none;gap:18px;list-style:none;}
+.dlinks a{font-size:13px;font-weight:500;color:#6b7280;cursor:pointer;text-decoration:none;}
+.dlinks a:hover{color:#1a6b4a;}
+@media(min-width:768px){.ham{display:none;}.dlinks{display:flex;}}
+
+/* AUTH MODAL */
+.auth-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;padding:20px;}
+.auth-overlay.open{display:flex;}
+.auth-box{background:#f7f4ef;border-radius:16px;width:100%;max-width:420px;overflow:hidden;}
+.auth-head{background:#0d1117;padding:22px 24px 18px;}
+.auth-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#f7f4ef;margin-bottom:4px;}
+.auth-logo span{color:#1a6b4a;}
+.auth-sub{font-size:14px;color:rgba(247,244,239,0.6);}
+.auth-tabs{display:flex;border-bottom:1px solid #e2ddd6;}
+.auth-tab{flex:1;padding:13px;border:none;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.auth-tab.active{background:#fff;color:#1a6b4a;border-bottom:2px solid #1a6b4a;}
+.auth-tab:not(.active){background:#f7f4ef;color:#6b7280;border-bottom:2px solid transparent;}
+.auth-body{padding:22px;}
+.auth-form{display:flex;flex-direction:column;gap:12px;}
+.afield{display:flex;flex-direction:column;gap:5px;}
+.afield label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7280;}
+.afield input{background:#fff;border:1.5px solid #e2ddd6;color:#0d1117;padding:12px 14px;border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;width:100%;}
+.afield input:focus{border-color:#1a6b4a;}
+.auth-err{background:rgba(183,28,28,0.1);color:#b71c1c;padding:10px 14px;border-radius:6px;font-size:13px;display:none;}
+.auth-ok{background:rgba(26,107,74,0.1);color:#1a6b4a;padding:10px 14px;border-radius:6px;font-size:13px;display:none;}
+.auth-submit{background:#1a6b4a;color:#fff;border:none;padding:13px;border-radius:6px;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;margin-top:4px;}
+.auth-cancel{width:100%;margin-top:10px;padding:10px;border:1.5px solid #e2ddd6;background:transparent;border-radius:6px;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;font-family:'DM Sans',sans-serif;}
 
 /* HERO */
 #page-home{padding-top:54px;}
-.hero{padding:24px 20px 48px;display:flex;flex-direction:column;gap:32px;}
-.photo-wrap{display:flex;justify-content:flex-start;padding-top:8px;}
-.photo-frame{position:relative;width:200px;height:250px;flex-shrink:0;}
-.photo-border{position:absolute;top:14px;left:-12px;width:100%;height:100%;border:2px solid var(--green);border-radius:6px;}
+.hero{padding:28px 20px 44px;display:flex;flex-direction:column;gap:28px;}
+.photo-wrap{display:flex;justify-content:flex-start;padding-left:14px;}
+.photo-frame{position:relative;width:195px;height:244px;flex-shrink:0;}
+.photo-border{position:absolute;top:14px;left:-14px;width:100%;height:100%;border:2px solid #1a6b4a;border-radius:6px;}
 .photo-box{position:relative;z-index:1;width:100%;height:100%;border-radius:6px;overflow:hidden;background:#d4c9b8;}
 .photo-box img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
-.photo-badge{position:absolute;bottom:12px;right:12px;z-index:2;background:var(--gold);color:white;padding:10px 12px;border-radius:6px;font-weight:700;text-align:center;line-height:1.2;font-size:12px;box-shadow:0 8px 20px rgba(232,168,56,0.4);}
-.photo-badge strong{font-size:20px;display:block;}
-.hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(26,107,74,0.1);color:#1a6b4a;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:6px 13px;border-radius:20px;margin-bottom:14px;}
+.photo-badge{position:absolute;bottom:10px;right:10px;z-index:2;background:#e8a838;color:#fff;padding:10px 12px;border-radius:6px;font-weight:700;text-align:center;line-height:1.2;font-size:12px;box-shadow:0 6px 16px rgba(232,168,56,0.4);}
+.photo-badge strong{font-size:19px;display:block;}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(26,107,74,0.1);color:#1a6b4a;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:6px 13px;border-radius:20px;margin-bottom:12px;}
 .htdot{width:6px;height:6px;background:#1a6b4a;border-radius:50%;animation:blink 1.5s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-h1{font-family:’Playfair Display’,serif;font-size:36px;line-height:1.1;font-weight:900;margin-bottom:14px;}
+h1{font-family:'Playfair Display',serif;font-size:34px;line-height:1.1;font-weight:900;margin-bottom:12px;color:#0d1117;}
 h1 em{color:#1a6b4a;font-style:italic;}
-.hero-desc{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:24px;}
-.hero-btns{display:flex;gap:10px;margin-bottom:32px;flex-wrap:wrap;}
-.btn-g{background:#1a6b4a !important;color:#ffffff !important;padding:11px 22px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;display:inline-block;cursor:pointer;border:none;font-family:’DM Sans’,sans-serif;-webkit-appearance:none;appearance:none;}
-.btn-g:hover{background:#145538;}
-.btn-o{border:1.5px solid var(--ink) !important;color:var(--ink) !important;padding:10px 20px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;display:inline-block;cursor:pointer;background:transparent !important;font-family:’DM Sans’,sans-serif;-webkit-appearance:none;appearance:none;}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;border-top:1px solid var(--line);padding-top:24px;}
-.snum{font-family:’Playfair Display’,serif;font-size:26px;font-weight:900;line-height:1;margin-bottom:3px;}
+.hero-desc{font-size:15px;color:#6b7280;line-height:1.75;margin-bottom:22px;}
+.hero-btns{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;}
+.btn-green{background:#1a6b4a;color:#fff;padding:12px 22px;border-radius:6px;font-size:14px;font-weight:600;display:inline-block;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;}
+.btn-outline{border:2px solid #0d1117;color:#0d1117;background:#fff;padding:11px 20px;border-radius:6px;font-size:14px;font-weight:600;display:inline-block;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-top:1px solid #e2ddd6;padding-top:22px;}
+.snum{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;line-height:1;margin-bottom:3px;color:#0d1117;}
 .snum span{color:#1a6b4a;}
-.slbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.slbl{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;}
 
 /* QUICK NAV */
-.quick-nav{padding:0 20px 48px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.qcard{background:var(--white);border:1px solid var(--line);padding:18px 16px;border-radius:10px;cursor:pointer;transition:all 0.2s;display:block;text-decoration:none;}
-.qcard:hover{border-color:#1a6b4a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.08);}
-.qcard-icon{font-size:24px;margin-bottom:8px;}
-.qcard-title{font-family:’Playfair Display’,serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;}
-.qcard-desc{font-size:12px;color:var(--muted);line-height:1.4;}
+.qnav{padding:0 20px 44px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.qcard{background:#fff;border:1px solid #e2ddd6;padding:16px;border-radius:10px;cursor:pointer;transition:all 0.2s;}
+.qcard:hover{border-color:#1a6b4a;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.07);}
+.qcard-icon{font-size:22px;margin-bottom:7px;}
+.qcard-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#0d1117;margin-bottom:3px;}
+.qcard-desc{font-size:12px;color:#6b7280;line-height:1.4;}
 
 /* SECTIONS */
-.sec{padding:56px 20px;}
+.sec{padding:52px 20px;}
 .slabel{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#1a6b4a;margin-bottom:10px;}
-h2{font-family:’Playfair Display’,serif;font-size:30px;font-weight:900;line-height:1.15;margin-bottom:12px;}
-.ssub{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:36px;}
-
-/* ABOUT */
-.sec-dark{background:var(--ink);}
+h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;line-height:1.15;margin-bottom:10px;color:#0d1117;}
+.ssub{font-size:15px;color:#6b7280;line-height:1.75;margin-bottom:32px;}
+.sec-dark{background:#0d1117;}
 .sec-dark .slabel{color:#e8a838;}
 .sec-dark h2{color:#f7f4ef;}
 .sec-dark .ssub{color:rgba(247,244,239,0.6);}
+.sec-light{background:#f0ece4;}
+
+/* ABOUT */
 .about-p{font-size:15px;color:rgba(247,244,239,0.78);line-height:1.85;margin-bottom:14px;}
-.acards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;}
+.acards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px;}
 .acard{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:14px;border-radius:8px;}
 .acard-i{font-size:20px;margin-bottom:7px;}
-.acard-t{font-size:13px;font-weight:600;color:var(--paper);margin-bottom:3px;}
+.acard-t{font-size:13px;font-weight:600;color:#f7f4ef;margin-bottom:3px;}
 .acard-d{font-size:12px;color:rgba(247,244,239,0.45);line-height:1.4;}
 
 /* TIMELINE */
-.tl{padding-left:18px;border-left:2px solid var(--line);}
+.tl{padding-left:18px;border-left:2px solid #e2ddd6;}
 .tl-dt{font-size:11px;font-weight:700;color:#1a6b4a;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
-.tl-ti{font-family:’Playfair Display’,serif;font-size:22px;font-weight:700;margin-bottom:3px;}
-.tl-co{font-size:14px;color:var(--muted);margin-bottom:14px;}
-.tl-li{list-style:none;display:flex;flex-direction:column;gap:9px;}
-.tl-li li{font-size:14px;color:var(--muted);padding-left:16px;position:relative;line-height:1.6;}
-.tl-li li::before{content:’→’;position:absolute;left:0;color:#1a6b4a;font-size:11px;top:3px;}
-.achv{margin-top:18px;padding:14px 16px;background:rgba(26,107,74,0.07);border-left:3px solid #1a6b4a;border-radius:0 6px 6px 0;}
-.achv strong{font-size:11px;color:#1a6b4a;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;}
-.achv p{font-size:13px;color:var(--muted);line-height:1.6;}
+.tl-ti{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;margin-bottom:3px;}
+.tl-co{font-size:14px;color:#6b7280;margin-bottom:14px;}
+.tl-li{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.tl-li li{font-size:14px;color:#6b7280;padding-left:18px;position:relative;line-height:1.6;}
+.tl-li li::before{content:'→';position:absolute;left:0;color:#1a6b4a;font-size:11px;top:3px;}
+.achv{margin-top:16px;padding:13px 15px;background:rgba(26,107,74,0.08);border-left:3px solid #1a6b4a;border-radius:0 6px 6px 0;}
+.achv strong{font-size:11px;color:#1a6b4a;display:block;margin-bottom:3px;text-transform:uppercase;}
+.achv p{font-size:13px;color:#6b7280;line-height:1.6;}
 
 /* SKILLS */
-.sec-light{background:#f0ece4;}
-.sg{margin-bottom:26px;}
-.sgt{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:11px;}
+.sg{margin-bottom:24px;}
+.sgt{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;}
 .tags{display:flex;flex-wrap:wrap;gap:7px;}
-.tag{background:var(--white);color:var(--ink);font-size:13px;font-weight:500;padding:7px 13px;border-radius:4px;border:1px solid var(--line);}
-.tag.g{background:#1a6b4a !important;color:#ffffff !important;border-color:#1a6b4a !important;}
-.bars{margin-top:32px;}
-.bi{margin-bottom:15px;}
-.bt{display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:6px;}
-.bp{color:var(--muted);font-size:12px;}
-.btr{height:5px;background:var(--line);border-radius:3px;overflow:hidden;}
-.bf{height:100%;border-radius:3px;background:linear-gradient(90deg,#1a6b4a,#2d9e6e);}
+.tag{background:#fff;color:#0d1117;font-size:13px;font-weight:500;padding:7px 12px;border-radius:4px;border:1px solid #e2ddd6;}
+.tag-filled{background:#1a6b4a;color:#fff;font-size:13px;font-weight:500;padding:7px 12px;border-radius:4px;border:1px solid #1a6b4a;}
+.bi{margin-bottom:14px;}
+.bt{display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:6px;color:#0d1117;}
+.bp{color:#6b7280;font-size:12px;}
+.btr{height:6px;background:#e2ddd6;border-radius:3px;overflow:hidden;}
+.bf{height:100%;border-radius:3px;background:#1a6b4a;}
 
 /* EDUCATION */
-.ecards{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
-.ecard{background:var(--white);border:1px solid var(--line);padding:20px 18px;border-radius:8px;position:relative;overflow:hidden;}
-.ecard::before{content:’’;position:absolute;top:0;left:0;right:0;height:3px;background:#1a6b4a;}
-.ei{font-size:22px;margin-bottom:10px;}
-.ed{font-family:’Playfair Display’,serif;font-size:15px;font-weight:700;margin-bottom:5px;line-height:1.3;}
-.es{font-size:13px;color:#1a6b4a;font-weight:500;margin-bottom:12px;}
-.ef{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:5px;}
-.ey{font-size:12px;color:var(--muted);}
+.ecards{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+.ecard{background:#fff;border:1px solid #e2ddd6;padding:18px;border-radius:8px;position:relative;overflow:hidden;}
+.ecard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#1a6b4a;}
+.ei{font-size:20px;margin-bottom:9px;}
+.ed{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:4px;line-height:1.3;}
+.es{font-size:13px;color:#1a6b4a;font-weight:500;margin-bottom:11px;}
+.ef{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;}
+.ey{font-size:12px;color:#6b7280;}
 .eg{font-size:12px;font-weight:700;background:rgba(26,107,74,0.08);color:#1a6b4a;padding:2px 8px;border-radius:2px;}
-.res{background:var(--ink);padding:20px 18px;border-radius:8px;display:flex;gap:14px;align-items:flex-start;}
-.ri{font-size:28px;flex-shrink:0;}
-.rt{font-family:’Playfair Display’,serif;font-size:15px;font-weight:700;color:var(--paper);margin-bottom:4px;}
-.rs{font-size:12px;color:rgba(247,244,239,0.5);margin-bottom:10px;}
+.res{background:#0d1117;padding:18px;border-radius:8px;display:flex;gap:12px;align-items:flex-start;}
+.ri{font-size:26px;flex-shrink:0;}
+.rt{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#f7f4ef;margin-bottom:4px;}
+.rs{font-size:12px;color:rgba(247,244,239,0.5);margin-bottom:8px;}
 .rtags{display:flex;flex-wrap:wrap;gap:6px;}
 .rtag{font-size:11px;border:1px solid rgba(255,255,255,0.2);padding:3px 8px;border-radius:2px;color:rgba(247,244,239,0.65);}
 
 /* CONTACT */
-.ci{font-size:15px;color:rgba(247,244,239,0.7);line-height:1.8;margin-bottom:28px;}
-.citems{display:flex;flex-direction:column;gap:14px;margin-bottom:32px;}
+.ci{font-size:15px;color:rgba(247,244,239,0.7);line-height:1.8;margin-bottom:24px;}
+.citems{display:flex;flex-direction:column;gap:13px;margin-bottom:28px;}
 .citem{display:flex;align-items:center;gap:12px;}
-.cico{width:40px;height:40px;flex-shrink:0;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.cico{width:40px;height:40px;flex-shrink:0;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;}
 .clbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:rgba(247,244,239,0.4);margin-bottom:1px;}
-.cval{font-size:14px;font-weight:500;color:var(--paper);}
-.cval a{color:var(--paper);text-decoration:none;}
+.cval{font-size:14px;font-weight:500;color:#f7f4ef;}
+.cval a{color:#f7f4ef;text-decoration:none;}
+.cinput{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#f7f4ef;padding:11px 13px;border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;resize:none;width:100%;margin-bottom:10px;}
+.cinput::placeholder{color:rgba(247,244,239,0.3);}
+.cinput:focus{border-color:#1a6b4a;}
+.csend{background:#1a6b4a;color:#fff;border:none;padding:12px 26px;border-radius:6px;font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;}
 
-/* SHARED FORM STYLES */
-.post-form-section{background:var(--ink);border-radius:14px;padding:24px 20px;margin-top:8px;}
-.post-form-title{font-family:’Playfair Display’,serif;font-size:18px;font-weight:700;color:var(--paper);margin-bottom:20px;}
-.post-form{display:flex;flex-direction:column;gap:12px;}
-.fg{display:flex;flex-direction:column;gap:5px;}
-.fg label{font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:rgba(247,244,239,0.45);}
-.fg input,.fg textarea,.fg select{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--paper);padding:11px 13px;border-radius:6px;font-size:14px;font-family:’DM Sans’,sans-serif;outline:none;resize:none;width:100%;}
-.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--green);}
-.fg input::placeholder,.fg textarea::placeholder{color:rgba(247,244,239,0.25);}
-.fg select option{background:#1a1a2e;color:var(--paper);}
-.fg input[type=“file”]{padding:8px 13px;cursor:pointer;}
+/* POST FORM */
+.pform-wrap{background:#0d1117;border-radius:12px;padding:22px 18px;margin-top:20px;}
+.pform-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#f7f4ef;margin-bottom:18px;}
+.pform{display:flex;flex-direction:column;gap:11px;}
+.pfield{display:flex;flex-direction:column;gap:4px;}
+.pfield label{font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:rgba(247,244,239,0.5);}
+.pfield input,.pfield textarea,.pfield select{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#f7f4ef;padding:11px 13px;border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;resize:none;width:100%;}
+.pfield input::placeholder,.pfield textarea::placeholder{color:rgba(247,244,239,0.3);}
+.pfield input:focus,.pfield textarea:focus,.pfield select:focus{border-color:#1a6b4a;}
+.pfield input[type=file]{padding:8px 13px;cursor:pointer;}
+.pfield select option{background:#1a1a2e;}
 
-/* SHARED POST CARD */
-.post-card{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);transition:transform 0.2s,box-shadow 0.2s;}
-.post-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.08);}
-.post-img{height:190px;display:flex;align-items:center;justify-content:center;font-size:60px;position:relative;overflow:hidden;}
+/* POST CARDS */
+.post-card{background:#fff;border:1px solid #e2ddd6;border-radius:12px;overflow:hidden;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,0.04);}
+.post-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:56px;position:relative;overflow:hidden;}
 .post-img img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;}
 .post-img span{position:relative;z-index:1;}
-.post-body{padding:18px 16px 20px;}
-.post-cat-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:10px;margin-bottom:8px;}
-.tag-life{background:rgba(26,107,74,0.1);color:#1a6b4a;}
-.tag-geo{background:rgba(13,71,161,0.1);color:#1565c0;}
-.tag-mem{background:rgba(74,20,140,0.1);color:#6a1b9a;}
-.tag-ach{background:rgba(232,168,56,0.1);color:#e65100;}
-.tag-goal{background:rgba(183,28,28,0.1);color:#b71c1c;}
-.post-title{font-family:’Playfair Display’,serif;font-size:18px;font-weight:700;margin-bottom:6px;line-height:1.3;}
-.post-date{font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:500;}
-.post-text{font-size:14px;color:var(--muted);line-height:1.75;}
+.post-body{padding:16px 14px 18px;}
+.pcat{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:10px;margin-bottom:8px;}
+.pcat-life{background:rgba(26,107,74,0.12);color:#1a6b4a;}
+.pcat-geo{background:rgba(13,71,161,0.1);color:#1565c0;}
+.pcat-mem{background:rgba(74,20,140,0.1);color:#6a1b9a;}
+.pcat-ach{background:rgba(232,168,56,0.15);color:#b45309;}
+.pcat-goal{background:rgba(183,28,28,0.1);color:#b71c1c;}
+.ptitle{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:5px;line-height:1.3;color:#0d1117;}
+.pdate{font-size:12px;color:#6b7280;margin-bottom:8px;}
+.ptext{font-size:14px;color:#6b7280;line-height:1.75;}
+
+/* COMMENTS */
+.comments-wrap{padding:14px;border-top:1px solid #e2ddd6;background:#f7f4ef;}
+.comments-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-bottom:10px;}
+.comment-item{padding:8px 0;border-bottom:1px solid #e2ddd6;}
+.comment-item:last-child{border-bottom:none;}
+.comment-author{font-size:12px;font-weight:600;color:#0d1117;}
+.comment-date{font-size:10px;color:#6b7280;margin-left:8px;}
+.comment-text{font-size:13px;color:#6b7280;line-height:1.5;margin-top:3px;}
+.comment-form{display:flex;gap:8px;margin-top:10px;}
+.comment-input{flex:1;background:#fff;border:1px solid #e2ddd6;color:#0d1117;padding:9px 12px;border-radius:6px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;}
+.comment-btn{background:#1a6b4a;color:#fff;border:none;padding:9px 14px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.sign-to-comment{font-size:13px;color:#6b7280;padding:8px 0;cursor:pointer;text-decoration:underline;}
 
 /* TABS */
-.tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
-.tab-btn{padding:8px 18px;border-radius:20px;border:1.5px solid var(--line);background:var(--white);font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;font-family:’DM Sans’,sans-serif;transition:all 0.2s;}
-.tab-btn.active,.tab-btn:hover{background:#1a6b4a;color:white;border-color:#1a6b4a;}
+.tabs{display:flex;gap:7px;margin-bottom:20px;flex-wrap:wrap;}
+.tbtn{padding:7px 16px;border-radius:20px;border:2px solid #e2ddd6;background:#fff;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.tbtn.active{background:#1a6b4a;color:#fff;border-color:#1a6b4a;}
 
-/* NOTICE BANNER */
-.notice-banner{background:linear-gradient(135deg,#1a6b4a,#2d9e6e);border-radius:12px;padding:20px;display:flex;gap:14px;align-items:flex-start;margin-bottom:28px;}
-.notice-icon{font-size:32px;flex-shrink:0;}
-.notice-title{font-family:’Playfair Display’,serif;font-size:16px;font-weight:700;color:white;margin-bottom:4px;}
-.notice-desc{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5;}
+/* NOTICE */
+.notice{background:#1a6b4a;border-radius:10px;padding:18px;display:flex;gap:12px;align-items:flex-start;margin-bottom:24px;}
+.notice-icon{font-size:28px;flex-shrink:0;}
+.notice-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:3px;}
+.notice-desc{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.5;}
 
-/* ACHIEVEMENTS */
-.ach-featured{background:linear-gradient(135deg,#1a6b4a,#2d9e6e);border-radius:10px;padding:24px 20px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start;}
-.ach-featured .post-title{color:white;}
-.ach-featured .post-text{color:rgba(255,255,255,0.8);}
-.ach-year{display:inline-block;font-size:11px;font-weight:700;color:var(--green);background:rgba(26,107,74,0.08);padding:2px 9px;border-radius:2px;margin-top:8px;}
-.ach-year-white{background:rgba(255,255,255,0.2);color:white;}
+/* ACH FEATURED */
+.ach-top{background:#1a6b4a;border-radius:10px;padding:22px 18px;margin-bottom:18px;display:flex;gap:13px;align-items:flex-start;}
+.ach-top .ptitle{color:#fff;}
+.ach-top .ptext{color:rgba(255,255,255,0.85);}
+.ach-yr{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:rgba(255,255,255,0.2);padding:2px 9px;border-radius:2px;margin-top:8px;}
+.goal-st{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:10px;margin-top:8px;}
+.gst-on{background:rgba(26,107,74,0.1);color:#1a6b4a;}
+.gst-pl{background:rgba(232,168,56,0.1);color:#b45309;}
+.gst-dn{background:rgba(33,150,243,0.1);color:#1565c0;}
+.gpbar{height:5px;background:#e2ddd6;border-radius:3px;overflow:hidden;margin-top:6px;}
+.gpfill{height:100%;background:#1a6b4a;border-radius:3px;}
 
-/* GOALS */
-.goal-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;margin-top:8px;}
-.goal-ongoing{background:rgba(26,107,74,0.1);color:#1a6b4a;}
-.goal-planned{background:rgba(232,168,56,0.1);color:var(--gold);}
-.goal-achieved{background:rgba(33,150,243,0.1);color:#1976d2;}
-.goal-prog-label{font-size:11px;color:var(--muted);margin-top:10px;}
-.goal-prog-bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:4px;}
-.goal-prog-fill{height:100%;background:#1a6b4a;border-radius:2px;}
-
-/* CONTACT FORM */
-.cform{display:flex;flex-direction:column;gap:11px;margin-bottom:0;}
-.bsend{background:#1a6b4a;color:white;border:none;padding:12px 26px;border-radius:4px;font-size:14px;font-weight:700;font-family:’DM Sans’,sans-serif;cursor:pointer;}
-
-/* INNER PAGE HEADER */
+/* INNER PAGES */
 .inner-page{padding-top:54px;}
-.page-hero{background:var(--ink);padding:40px 20px 36px;}
-.back-btn{display:inline-flex;align-items:center;gap:6px;color:rgba(247,244,239,0.6);font-size:13px;font-weight:500;cursor:pointer;margin-bottom:16px;background:none;border:none;font-family:’DM Sans’,sans-serif;padding:0;}
+.page-head{background:#0d1117;padding:36px 20px 32px;}
+.back-btn{display:inline-flex;align-items:center;gap:5px;color:rgba(247,244,239,0.6);font-size:13px;font-weight:500;cursor:pointer;margin-bottom:14px;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0;}
 .back-btn:hover{color:#e8a838;}
-.page-badge{display:inline-block;background:rgba(255,255,255,0.1);color:rgba(247,244,239,0.7);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:10px;}
-.page-title{font-family:’Playfair Display’,serif;font-size:34px;font-weight:900;color:var(--paper);line-height:1.1;margin-bottom:8px;}
-.page-title em{color:#e8a838;font-style:italic;}
-.page-sub{font-size:15px;color:rgba(247,244,239,0.6);line-height:1.7;}
-.page-body{padding:36px 20px 60px;}
+.pbadge{display:inline-block;background:rgba(255,255,255,0.1);color:rgba(247,244,239,0.7);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 11px;border-radius:20px;margin-bottom:9px;}
+.ptop-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:#f7f4ef;line-height:1.1;margin-bottom:7px;}
+.ptop-title em{color:#e8a838;font-style:italic;}
+.ptop-sub{font-size:14px;color:rgba(247,244,239,0.6);line-height:1.7;}
+.page-body{padding:32px 20px 56px;}
 
 /* FOOTER */
-footer{background:#080b10;padding:18px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;}
-.flogo{font-family:’Playfair Display’,serif;font-size:17px;font-weight:900;color:rgba(247,244,239,0.2);}
+footer{background:#080b10;padding:16px 20px;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;}
+.flogo{font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:rgba(247,244,239,0.2);}
 .flogo span{color:#1a6b4a;}
 footer p{font-size:12px;color:rgba(247,244,239,0.25);}
 
 /* ANIMATIONS */
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.fadein{animation:fadeInUp 0.4s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.fadein{animation:fadeUp 0.35s ease;}
 
 /* DESKTOP */
 @media(min-width:768px){
-nav{padding:0 60px;height:62px;}
-.hero{flex-direction:row;align-items:center;padding:40px 8% 60px;gap:70px;}
-.photo-frame{width:340px;height:425px;}
-.photo-badge{bottom:-18px;right:-18px;padding:14px 16px;}
-.photo-badge strong{font-size:24px;}
-h1{font-size:56px;}
-.hero-stats{grid-template-columns:repeat(4,1fr);}
-.quick-nav{padding:0 8% 80px;grid-template-columns:repeat(4,1fr);}
-.sec{padding:80px 8%;}
-h2{font-size:38px;}
-.about-body{display:grid;grid-template-columns:1.2fr 1fr;gap:50px;align-items:start;}
-.acards{margin-top:0;}
-.ecards{flex-direction:row;}
-.ecard{flex:1;}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
-.page-body{padding:48px 8% 80px;}
-.page-hero{padding:56px 8% 48px;}
-footer{flex-direction:row;justify-content:space-between;padding:22px 8%;}
+  nav{padding:0 60px;}
+  .dlinks{display:flex;}
+  .ham{display:none;}
+  .hero{flex-direction:row;align-items:center;padding:36px 8% 56px;gap:70px;}
+  .photo-wrap{padding-left:0;}
+  .photo-frame{width:340px;height:425px;}
+  .photo-badge{bottom:-16px;right:-16px;padding:13px 15px;}
+  .photo-badge strong{font-size:23px;}
+  h1{font-size:54px;}
+  .hero-stats{grid-template-columns:repeat(4,1fr);}
+  .qnav{padding:0 8% 72px;grid-template-columns:repeat(4,1fr);}
+  .sec{padding:76px 8%;}
+  h2{font-size:36px;}
+  .about-body{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start;}
+  .acards{margin-top:0;}
+  .ecards{flex-direction:row;}
+  .ecard{flex:1;}
+  .cg{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .page-body{padding:44px 8% 76px;}
+  .page-head{padding:52px 8% 44px;}
+  footer{flex-direction:row;justify-content:space-between;padding:20px 8%;}
 }
 </style>
-
 </head>
 <body>
 
 <!-- NAV -->
-
 <nav>
-  <span class="nav-logo" onclick="showPage('home')">Antar<span>.</span></span>
-  <ul class="desk-links">
-    <li><a onclick="goSection('about')">About</a></li>
-    <li><a onclick="goSection('experience')">Experience</a></li>
-    <li><a onclick="goSection('skills')">Skills</a></li>
-    <li><a onclick="showPage('blog')">Blog</a></li>
-    <li><a onclick="showPage('memories')">Memories</a></li>
-    <li><a onclick="showPage('achievements')">Achievements</a></li>
-    <li><a onclick="showPage('goals')">Goals</a></li>
-    <li><a onclick="goSection('contact')">Contact</a></li>
+  <span class="nav-logo" onclick="goHome()">Antar<span>.</span></span>
+  <ul class="dlinks">
+    <li><a onclick="goSec('about')">About</a></li>
+    <li><a onclick="goSec('experience')">Experience</a></li>
+    <li><a onclick="goSec('skills')">Skills</a></li>
+    <li><a onclick="goPage('blog')">Blog</a></li>
+    <li><a onclick="goPage('memories')">Memories</a></li>
+    <li><a onclick="goPage('achievements')">Achievements</a></li>
+    <li><a onclick="goPage('goals')">Goals</a></li>
+    <li><a onclick="goSec('contact')">Contact</a></li>
   </ul>
-  <button class="hamburger" id="ham" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-right">
+    <!-- Auth button shown when logged out -->
+    <button class="nav-auth-btn" id="navAuthBtn" onclick="openAuth()">Sign In</button>
+    <!-- User avatar shown when logged in -->
+    <div id="navUser" style="display:none;position:relative;">
+      <div class="uavatar" id="uavatar" onclick="toggleUMenu()"></div>
+      <div class="udropdown" id="udropdown">
+        <div class="uname"><div class="uname-main" id="uname-main"></div><div class="uname-role" id="uname-role"></div></div>
+        <div class="umenu-item" onclick="goPage('blog');toggleUMenu()">✍️ Blog</div>
+        <div class="umenu-item" onclick="goPage('memories');toggleUMenu()">📸 Memories</div>
+        <div class="umenu-item red" onclick="doLogout()">Sign Out</div>
+      </div>
+    </div>
+    <button class="ham" id="hamBtn" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- MOBILE MENU -->
-
-<div class="mobile-menu" id="mobileMenu">
-  <a onclick="navGo('home','')">🏠 Home</a>
-  <a onclick="navGo('home','about')">👤 About</a>
-  <a onclick="navGo('home','experience')">💼 Experience</a>
-  <a onclick="navGo('home','skills')">⚡ Skills</a>
-  <a onclick="navGo('home','education')">🎓 Education</a>
-  <a onclick="navGo('home','contact')">📬 Contact</a>
-  <div class="menu-sec">More Pages</div>
-  <a onclick="navGo('blog','')">✍️ Blog</a>
-  <a onclick="navGo('memories','')">📸 Memories</a>
-  <a onclick="navGo('achievements','')">🏆 Achievements</a>
-  <a onclick="navGo('goals','')">🎯 Goals</a>
+<div class="mmenu" id="mmenu">
+  <a onclick="goHome()">🏠 Home</a>
+  <a onclick="goSec('about')">👤 About</a>
+  <a onclick="goSec('experience')">💼 Experience</a>
+  <a onclick="goSec('skills')">⚡ Skills</a>
+  <a onclick="goSec('education')">🎓 Education</a>
+  <a onclick="goSec('contact')">📬 Contact</a>
+  <div class="mmenu-sec">More Pages</div>
+  <a onclick="goPage('blog')">✍️ Blog</a>
+  <a onclick="goPage('memories')">📸 Memories</a>
+  <a onclick="goPage('achievements')">🏆 Achievements</a>
+  <a onclick="goPage('goals')">🎯 Goals</a>
+  <div class="mmenu-sec">Account</div>
+  <a id="mmSignIn" onclick="openAuth()">🔐 Sign In / Sign Up</a>
+  <a id="mmSignOut" style="display:none;color:#b71c1c;" onclick="doLogout()">Sign Out</a>
 </div>
 
-<!-- ═══════ HOME ═══════ -->
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-box">
+    <div class="auth-head">
+      <div class="auth-logo">Antar<span>.</span></div>
+      <div class="auth-sub">Join the community</div>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="setTab('login')">Sign In</button>
+      <button class="auth-tab" id="tabSignup" onclick="setTab('signup')">Sign Up</button>
+    </div>
+    <div class="auth-body">
+      <!-- LOGIN -->
+      <div id="formLogin">
+        <div class="auth-form">
+          <div class="afield"><label>Email</label><input type="email" id="lEmail" placeholder="your@email.com"></div>
+          <div class="afield"><label>Password</label><input type="password" id="lPass" placeholder="Password"></div>
+          <div class="auth-err" id="lErr"></div>
+          <button class="auth-submit" onclick="doLogin()">Sign In</button>
+        </div>
+      </div>
+      <!-- SIGNUP -->
+      <div id="formSignup" style="display:none;">
+        <div class="auth-form">
+          <div class="afield"><label>Full Name</label><input type="text" id="sName" placeholder="Your name"></div>
+          <div class="afield"><label>Email</label><input type="email" id="sEmail" placeholder="your@email.com"></div>
+          <div class="afield"><label>Password</label><input type="password" id="sPass" placeholder="Min 6 characters"></div>
+          <div class="auth-err" id="sErr"></div>
+          <div class="auth-ok" id="sOk"></div>
+          <button class="auth-submit" onclick="doSignup()">Create Account</button>
+        </div>
+      </div>
+      <button class="auth-cancel" onclick="closeAuth()">Cancel</button>
+    </div>
+  </div>
+</div>
 
+<!-- HOME PAGE -->
 <div class="page active" id="page-home">
   <div class="hero">
     <div class="photo-wrap">
@@ -296,354 +391,293 @@ footer{flex-direction:row;justify-content:space-between;padding:22px 8%;}
       </div>
     </div>
     <div>
-      <div class="hero-tag"><span class="htdot"></span>Available for Opportunities</div>
-      <h1>Turning Data into <em>Actionable</em> Insights.</h1>
-      <p class="hero-desc">Data Executive &amp; Business Analyst with 3+ years at Catalyst Solutions, Chattogram. I transform complex datasets into clear strategies that drive real business decisions.</p>
+      <div class="hero-tag"><span class="htdot"></span>NOC Engineer — Data-Driven Network Operations</div>
+      <h1>NOC Engineer — <em>Data-Driven</em> Network Operations</h1>
+      <p class="hero-desc">NOC Engineer at Echolink Tel Ltd, monitoring VoIP network performance, routes and vendor quality. Backed by 3+ years as a Data Executive &amp; MIS Professional at Catalyst Analytics, Chattogram, I bring an analytical, data-driven approach to network operations.</p>
       <div class="hero-btns">
-        <button class="btn-g" onclick="goSection('experience')">View My Work</button>
-        <button class="btn-o" onclick="goSection('contact')">Get in Touch</button>
+        <button class="btn-green" onclick="goSec('experience')">View My Work</button>
+        <button class="btn-outline" onclick="goSec('contact')">Get in Touch</button>
       </div>
       <div class="hero-stats">
         <div><div class="snum">3<span>+</span></div><div class="slbl">Years Exp.</div></div>
         <div><div class="snum">3<span>.55</span></div><div class="slbl">CGPA / 4.00</div></div>
-        <div><div class="snum">15<span>+</span></div><div class="slbl">Core Skills</div></div>
+        <div><div class="snum">17<span>+</span></div><div class="slbl">Core Skills</div></div>
         <div><div class="snum">100<span>%</span></div><div class="slbl">Dedication</div></div>
       </div>
     </div>
   </div>
 
-  <div class="quick-nav">
-    <div class="qcard" onclick="showPage('blog')"><div class="qcard-icon">✍️</div><div class="qcard-title">Blog</div><div class="qcard-desc">Life Stories & Geopolitics</div></div>
-    <div class="qcard" onclick="showPage('memories')"><div class="qcard-icon">📸</div><div class="qcard-title">Memories</div><div class="qcard-desc">University life & moments</div></div>
-    <div class="qcard" onclick="showPage('achievements')"><div class="qcard-icon">🏆</div><div class="qcard-title">Achievements</div><div class="qcard-desc">My wins & recognitions</div></div>
-    <div class="qcard" onclick="showPage('goals')"><div class="qcard-icon">🎯</div><div class="qcard-title">Goals</div><div class="qcard-desc">Where I'm headed next</div></div>
+  <div class="qnav">
+    <div class="qcard" onclick="goPage('blog')"><div class="qcard-icon">✍️</div><div class="qcard-title">Blog</div><div class="qcard-desc">Life Stories & Geopolitics</div></div>
+    <div class="qcard" onclick="goPage('memories')"><div class="qcard-icon">📸</div><div class="qcard-title">Memories</div><div class="qcard-desc">University life & moments</div></div>
+    <div class="qcard" onclick="goPage('achievements')"><div class="qcard-icon">🏆</div><div class="qcard-title">Achievements</div><div class="qcard-desc">My wins & recognitions</div></div>
+    <div class="qcard" onclick="goPage('goals')"><div class="qcard-icon">🎯</div><div class="qcard-title">Goals</div><div class="qcard-desc">Where I'm headed</div></div>
   </div>
 
   <!-- ABOUT -->
-
   <div class="sec sec-dark" id="about">
     <div class="slabel">Who I Am</div>
-    <h2 style="color:var(--paper)">Passionate about<br>data-driven decisions</h2>
+    <h2 style="color:#f7f4ef;">Passionate about<br>data-driven decisions</h2>
     <p class="ssub">A brief look at my background and what drives me professionally.</p>
     <div class="about-body">
       <div>
-        <p class="about-p">I'm <strong style="color:#fff">Antar Hossain</strong> — a Data Executive with 3+ years at Catalyst Solutions, where I analyze complex datasets, identify trends, and deliver actionable insights that drive business decisions.</p>
-        <p class="about-p">My role allows me to transform raw data into valuable information that supports strategic goals. I bring a strong analytical mindset and clear communication skills to every project.</p>
-        <p class="about-p">I'm actively seeking challenging positions where I can broaden my knowledge and contribute meaningfully to an organization's growth.</p>
+        <p class="about-p">I am a NOC Engineer with a strong foundation in data analysis, reporting, and business operations — combining technical troubleshooting with an analytical, data-driven mindset.</p>
+        <p class="about-p">In my current role, I focus on real-time monitoring, incident management, and service availability. I monitor VoIP traffic, investigate call failures, registration and call quality issues, and analyze SIP signaling and performance data to resolve incidents — coordinating with technical teams, carriers, and service providers along the way.</p>
+        <p class="about-p">Before moving into VoIP, I worked as a Data Executive, building hands-on experience in data analysis, reporting, dashboards, and business insights using Excel, Google Sheets, and PowerPoint.</p>
+        <p class="about-p">I value accuracy, continuous learning, and getting to the root cause of every issue — and I'm currently focused on deepening my expertise in VoIP, networking, and NOC operations while building on my data analytics background.</p>
       </div>
       <div class="acards">
         <div class="acard"><div class="acard-i">🧩</div><div class="acard-t">Analytical Thinker</div><div class="acard-d">Breaking complex problems into clear insights</div></div>
-        <div class="acard"><div class="acard-i">🤝</div><div class="acard-t">Team Builder</div><div class="acard-d">Strong interpersonal & leadership skills</div></div>
-        <div class="acard"><div class="acard-i">🔄</div><div class="acard-t">Change-Oriented</div><div class="acard-d">Adaptable and quick to learn new tools</div></div>
-        <div class="acard"><div class="acard-i">🎯</div><div class="acard-t">Service-Focused</div><div class="acard-d">Committed to delivering real value</div></div>
+        <div class="acard"><div class="acard-i">🤝</div><div class="acard-t">Team Builder</div><div class="acard-d">Strong interpersonal & leadership</div></div>
+        <div class="acard"><div class="acard-i">🔄</div><div class="acard-t">Change-Oriented</div><div class="acard-d">Adaptable, quick to learn</div></div>
+        <div class="acard"><div class="acard-i">🎯</div><div class="acard-t">Service-Focused</div><div class="acard-d">Committed to real value</div></div>
       </div>
     </div>
   </div>
 
   <!-- EXPERIENCE -->
-
   <div class="sec" id="experience">
-    <div class="slabel">Career</div>
-    <h2>Work Experience</h2>
-    <p class="ssub">My professional journey and the impact I've made along the way.</p>
+    <div class="slabel">Career</div><h2>Work Experience</h2>
+    <p class="ssub">My professional journey and the impact I've made.</p>
     <div class="tl">
-      <div class="tl-dt">January 2022 — Present</div>
-      <div class="tl-ti">Data Executive</div>
-      <div class="tl-co">Catalyst Solutions · Chattogram, Bangladesh</div>
+      <div class="tl-dt">September 2026 — Present</div>
+      <div class="tl-ti">NOC Engineer</div>
+      <div class="tl-co">Echolink Tel Ltd</div>
       <ul class="tl-li">
-        <li>Analyzed large datasets to identify trends and patterns driving business strategy</li>
-        <li>Created visually compelling dashboards using PowerPoint and Google Sheets</li>
-        <li>Provided technical support for software maintenance and internal tooling</li>
-        <li>Assessed marketing strategies through data-backed trend analysis</li>
-        <li>Prepared detailed reports with key findings and actionable recommendations</li>
-        <li>Designed reports for non-technical stakeholders — simplifying complex data</li>
-        <li>Engaged with clients to understand their needs and delivered custom solutions</li>
-        <li>Streamlined data collection processes, significantly reducing manual entry time</li>
+        <li>Monitor live VoIP traffic and network performance, including CPS, ASR, ACD, NER and PDD</li>
+        <li>Monitor route and vendor performance to identify poor-quality or unstable routes</li>
+        <li>Troubleshoot call failures, SIP response codes, one-way audio and no-audio issues</li>
+        <li>Analyze CDRs and SIP signaling (INVITE, 180 Ringing, 200 OK, BYE, etc.) to find root causes</li>
+        <li>Coordinate with vendors and carriers to report and resolve technical issues</li>
+        <li>Detect and escalate incidents, maintaining trouble tickets until resolution</li>
+        <li>Prepare daily/weekly traffic and route-performance reports for management</li>
       </ul>
-      <div class="achv"><strong>🏆 Key Achievement</strong><p>Successfully transformed raw data into actionable insights that directly supported Catalyst's strategic goals and improved decision-making timelines.</p></div>
+    </div>
+    <div class="tl" style="margin-top:32px;">
+      <div class="tl-dt">January 2022 — August 2026</div>
+      <div class="tl-ti">Data Executive &amp; MIS Professional</div>
+      <div class="tl-co">Catalyst Analytics · Chattogram, Bangladesh</div>
+      <ul class="tl-li">
+        <li>Analyzed large datasets to identify trends and patterns</li>
+        <li>Created compelling dashboards using PowerPoint and Google Sheets</li>
+        <li>Provided technical support for software maintenance</li>
+        <li>Assessed marketing strategies through data-backed trend analysis</li>
+        <li>Prepared detailed reports with key findings and recommendations</li>
+        <li>Designed reports for non-technical stakeholders</li>
+        <li>Engaged with clients to deliver custom data solutions</li>
+        <li>Streamlined data collection, reducing manual entry time</li>
+      </ul>
+      <div style="font-size:13px;font-weight:700;color:#0d1117;margin-top:16px;margin-bottom:8px;">Admin Support</div>
+      <ul class="tl-li">
+        <li>Office monitoring</li>
+        <li>Expense handling</li>
+        <li>Staff handling</li>
+      </ul>
+      <div class="achv"><strong>🏆 Key Achievement</strong><p>Transformed raw data into actionable insights supporting Catalyst's strategic goals and improving decision-making timelines.</p></div>
     </div>
   </div>
 
   <!-- SKILLS -->
-
   <div class="sec sec-light" id="skills">
-    <div class="slabel">Expertise</div>
-    <h2>Skills &amp; Tools</h2>
-    <p class="ssub">A blend of technical ability and soft skills that make me effective.</p>
-    <div class="sg"><div class="sgt">Data & Analytics</div><div class="tags"><span class="tag g">Data Visualization</span><span class="tag g">Trend Analysis</span><span class="tag g">Data Interpretation</span><span class="tag">Dashboard Design</span><span class="tag">Report Generation</span></div></div>
-    <div class="sg"><div class="sgt">Tools & Software</div><div class="tags"><span class="tag g">Advanced Excel</span><span class="tag g">Google Sheets</span><span class="tag">PowerPoint</span><span class="tag">Technical Support</span></div></div>
-    <div class="sg"><div class="sgt">Professional</div><div class="tags"><span class="tag">Strategic Planning</span><span class="tag">Research Proficiency</span><span class="tag">Documentation</span><span class="tag">Logical Thinking</span><span class="tag">Communication</span><span class="tag">Leadership</span></div></div>
-    <div class="bars">
-      <div class="sgt" style="margin-bottom:18px;">Proficiency</div>
+    <div class="slabel">Expertise</div><h2>Skills &amp; Tools</h2>
+    <p class="ssub">A blend of technical ability and soft skills.</p>
+    <div class="sg"><div class="sgt">NOC & VoIP Operations</div><div class="tags"><span class="tag-filled">SIP Signaling</span><span class="tag-filled">CDR Analysis</span><span class="tag-filled">VoIP Traffic Monitoring</span><span class="tag-filled">Incident Management</span><span class="tag">Route & Vendor Management</span><span class="tag">Call Quality Monitoring (ASR/ACD/NER/PDD)</span><span class="tag">Network Troubleshooting</span><span class="tag">Vendor Coordination</span></div></div>
+    <div class="sg"><div class="sgt">Data & Analytics</div><div class="tags"><span class="tag-filled">Data Visualization</span><span class="tag-filled">Trend Analysis</span><span class="tag-filled">Data Interpretation</span><span class="tag">Dashboard Design</span><span class="tag">Report Generation</span></div></div>
+    <div class="sg"><div class="sgt">Tools & Software</div><div class="tags"><span class="tag-filled">Advanced Excel</span><span class="tag-filled">Google Sheets</span><span class="tag">PowerPoint</span><span class="tag">Technical Support</span></div></div>
+    <div class="sg"><div class="sgt">MIS Skills</div><div class="tags"><span class="tag-filled">MIS Reporting</span><span class="tag-filled">Report Generation</span><span class="tag-filled">Data Presentation</span><span class="tag-filled">Business Intelligence</span><span class="tag">KPI Tracking</span><span class="tag">Management Reporting</span><span class="tag">PowerPoint Presentations</span><span class="tag">Data Consolidation</span></div></div>
+    <div class="sg"><div class="sgt">Professional</div><div class="tags"><span class="tag">Strategic Planning</span><span class="tag">Research Proficiency</span><span class="tag">Documentation</span><span class="tag">Logical Thinking</span><span class="tag">Communication</span><span class="tag">Leadership</span><span class="tag">Problem Solving</span><span class="tag">Analytical Thinking</span><span class="tag">Highly Organized</span><span class="tag">Service-Focused</span><span class="tag">Team Building</span><span class="tag">Interpersonal Skills</span><span class="tag">Adaptability</span></div></div>
+    <div style="margin-top:28px;">
+      <div class="sgt" style="margin-bottom:16px;">Proficiency</div>
+      <div class="bi"><div class="bt"><span>VoIP & Network Monitoring</span><span class="bp">80%</span></div><div class="btr"><div class="bf" style="width:80%"></div></div></div>
       <div class="bi"><div class="bt"><span>Data Analysis & Visualization</span><span class="bp">90%</span></div><div class="btr"><div class="bf" style="width:90%"></div></div></div>
       <div class="bi"><div class="bt"><span>Advanced Excel & Google Sheets</span><span class="bp">88%</span></div><div class="btr"><div class="bf" style="width:88%"></div></div></div>
       <div class="bi"><div class="bt"><span>Dashboard Design</span><span class="bp">85%</span></div><div class="btr"><div class="bf" style="width:85%"></div></div></div>
       <div class="bi"><div class="bt"><span>Report Generation</span><span class="bp">87%</span></div><div class="btr"><div class="bf" style="width:87%"></div></div></div>
       <div class="bi"><div class="bt"><span>Strategic Planning</span><span class="bp">78%</span></div><div class="btr"><div class="bf" style="width:78%"></div></div></div>
-      <div class="bi"><div class="bt"><span>Technical Support</span><span class="bp">80%</span></div><div class="btr"><div class="bf" style="width:80%"></div></div></div>
     </div>
   </div>
 
   <!-- EDUCATION -->
-
   <div class="sec" id="education">
-    <div class="slabel">Academic</div>
-    <h2>Education</h2>
-    <p class="ssub">My academic foundation in Computer Science & Engineering.</p>
+    <div class="slabel">Academic</div><h2>Education</h2>
+    <p class="ssub">My foundation in Computer Science & Engineering.</p>
     <div class="ecards">
-      <div class="ecard"><div class="ei">🏛️</div><div class="ed">B.Sc in Engineering — Computer Science & Engineering</div><div class="es">Port City International University, Chattogram</div><div class="ef"><span class="ey">Graduated April 2021</span><span class="eg">CGPA 3.55 / 4.00</span></div></div>
-      <div class="ecard"><div class="ei">📚</div><div class="ed">Higher Secondary Certificate (HSC) — Science</div><div class="es">Santaher Govt. College, Adamdighi, Bogura</div><div class="ef"><span class="ey">Completed July 2016</span><span class="eg">GPA 3.08 / 5.00</span></div></div>
-      <div class="ecard"><div class="ei">📖</div><div class="ed">Secondary School Certificate (SSC) — Science</div><div class="es">Gangjaour High School, Naogaon</div><div class="ef"><span class="ey">Completed May 2013</span><span class="eg">GPA 4.00 / 5.00</span></div></div>
+      <div class="ecard"><div class="ei">🏛️</div><div class="ed">B.Sc Engineering — Computer Science & Engineering</div><div class="es">Port City International University, Chattogram</div><div class="ef"><span class="ey">April 2021</span><span class="eg">CGPA 3.55/4.00</span></div></div>
+      <div class="ecard"><div class="ei">📚</div><div class="ed">Higher Secondary Certificate (HSC) — Science</div><div class="es">Santaher Govt. College, Bogura</div><div class="ef"><span class="ey">July 2016</span><span class="eg">GPA 3.08/5.00</span></div></div>
+      <div class="ecard"><div class="ei">📖</div><div class="ed">Secondary School Certificate (SSC) — Science</div><div class="es">Gangjaour High School, Naogaon</div><div class="ef"><span class="ey">May 2013</span><span class="eg">GPA 4.00/5.00</span></div></div>
     </div>
     <div class="slabel">Research & Workshops</div>
-    <div class="res">
-      <div class="ri">🤖</div>
-      <div><div class="rt">Face Detection & Recognition using CNN with VGG16 Model</div><div class="rs">PCIU Hackathon · 10 November 2018 · Game Dev. Workshop · 2018</div><div class="rtags"><span class="rtag">Machine Learning</span><span class="rtag">CNN</span><span class="rtag">VGG16</span><span class="rtag">Computer Vision</span><span class="rtag">Game Dev</span></div></div>
-    </div>
+    <div class="res"><div class="ri">🤖</div><div><div class="rt">Face Detection & Recognition using CNN with VGG16</div><div class="rs">PCIU Hackathon · November 2018 · Game Dev Workshop · 2018</div><div class="rtags"><span class="rtag">Machine Learning</span><span class="rtag">CNN</span><span class="rtag">VGG16</span><span class="rtag">Computer Vision</span></div></div></div>
   </div>
 
   <!-- CONTACT -->
-
   <div class="sec sec-dark" id="contact">
     <div class="slabel">Get In Touch</div>
-    <h2 style="color:var(--paper)">Let's work <em style="color:var(--gold);font-style:italic;">together</em></h2>
-    <div class="contact-grid">
+    <h2 style="color:#f7f4ef;">Let's work <em style="color:#e8a838;font-style:italic;">together</em></h2>
+    <div class="cg">
       <div>
-        <p class="ci">Open to new opportunities, collaborations, and challenges. If you're looking for a data professional who transforms numbers into strategy — let's talk.</p>
+        <p class="ci">Open to new opportunities and collaborations. If you're looking for a data professional who transforms numbers into strategy — let's talk.</p>
         <div class="citems">
-          <div class="citem"><div class="cico">📞</div><div><div class="clbl">Phone</div><div class="cval"><a href="tel:+8801846096583">+880 1846-096583</a></div></div></div>
+          <div class="citem"><div class="cico">📞</div><div><div class="clbl">Phone</div><div class="cval"><a href="tel:+8801615858198">+880 1615-858198</a></div></div></div>
           <div class="citem"><div class="cico">✉️</div><div><div class="clbl">Email</div><div class="cval"><a href="mailto:cse.antar.hossain@gmail.com">cse.antar.hossain@gmail.com</a></div></div></div>
-          <div class="citem"><div class="cico">📍</div><div><div class="clbl">Location</div><div class="cval">Chattogram, Bangladesh</div></div></div>
+          <div class="citem"><div class="cico">📍</div><div><div class="clbl">Location</div><div class="cval">Dhaka, Bangladesh</div></div></div>
         </div>
       </div>
       <div>
-        <div class="cform">
-          <div class="fg"><label>Your Name</label><input type="text" placeholder="John Smith" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--paper);padding:11px 13px;border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;width:100%;"></div>
-          <div class="fg"><label style="font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:rgba(247,244,239,0.45);">Email</label><input type="email" placeholder="john@company.com" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--paper);padding:11px 13px;border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;width:100%;"></div>
-          <div class="fg"><label style="font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:rgba(247,244,239,0.45);">Message</label><textarea rows="4" placeholder="Tell me about your opportunity..." style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--paper);padding:11px 13px;border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;resize:none;width:100%;"></textarea></div>
-          <button class="bsend" onclick="this.textContent='✓ Sent!';setTimeout(()=>{this.textContent='Send Message →'},3000)">Send Message →</button>
-        </div>
+        <input class="cinput" type="text" placeholder="Your Name">
+        <input class="cinput" type="email" placeholder="your@email.com">
+        <input class="cinput" type="text" placeholder="Subject">
+        <textarea class="cinput" rows="4" placeholder="Your message..."></textarea>
+        <button class="csend" onclick="this.textContent='✓ Sent!';setTimeout(function(){this.textContent='Send Message'},3000,this)">Send Message</button>
       </div>
     </div>
   </div>
 
-  <footer>
-    <div class="flogo">Antar<span>.</span></div>
-    <p>© 2026 Antar Hossain · All rights reserved</p>
-  </footer>
+  <footer><div class="flogo">Antar<span>.</span></div><p>© 2026 Antar Hossain · All rights reserved</p></footer>
 </div>
 
-<!-- ═══════ BLOG ═══════ -->
-
+<!-- BLOG PAGE -->
 <div class="page" id="page-blog">
   <div class="inner-page">
-    <div class="page-hero">
-      <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
-      <div class="page-badge">Writing</div>
-      <div class="page-title">My <em>Blog</em></div>
-      <div class="page-sub">Thoughts on life, the world, and everything in between.</div>
+    <div class="page-head">
+      <button class="back-btn" onclick="goHome()">← Back</button>
+      <div class="pbadge">Writing</div>
+      <div class="ptop-title">My <em>Blog</em></div>
+      <div class="ptop-sub">Thoughts on life, the world, and everything in between.</div>
     </div>
     <div class="page-body">
       <div class="tabs">
-        <button class="tab-btn active" onclick="filterPosts('blogList','all',this)">All Posts</button>
-        <button class="tab-btn" onclick="filterPosts('blogList','life',this)">🌱 Life Stories</button>
-        <button class="tab-btn" onclick="filterPosts('blogList','geo',this)">🌍 Geopolitics</button>
+        <button class="tbtn active" onclick="filterList('blogList','all',this)">All</button>
+        <button class="tbtn" onclick="filterList('blogList','life',this)">🌱 Life Stories</button>
+        <button class="tbtn" onclick="filterList('blogList','geo',this)">🌍 Geopolitics</button>
       </div>
       <div id="blogList">
         <div class="post-card" data-cat="life">
           <div class="post-img" style="background:linear-gradient(135deg,#1a6b4a,#2d9e6e);"><span>🌱</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-life">Life Stories</div><div class="post-title">Finding My Path in Data</div><div class="post-date">📅 May 2026</div><div class="post-text">How a curious mind and a love for patterns led me into the world of data analytics and changed my perspective on everything.</div></div>
+          <div class="post-body"><div class="pcat pcat-life">Life Stories</div><div class="ptitle">Finding My Path in Data</div><div class="pdate">📅 May 2026</div><div class="ptext">How a curious mind and a love for patterns led me into the world of data analytics.</div></div>
+          <div class="comments-wrap" id="cw_b1"><div class="comments-title">Comments</div><div id="cbox_b1"></div><div id="cform_b1" style="display:none;"><div class="comment-form"><input class="comment-input" id="cinput_b1" placeholder="Write a comment..."><button class="comment-btn" onclick="postComment('b1')">Post</button></div></div><div class="sign-to-comment" id="csign_b1" onclick="openAuth()">Sign in to comment</div></div>
         </div>
         <div class="post-card" data-cat="geo">
           <div class="post-img" style="background:linear-gradient(135deg,#0d47a1,#1976d2);"><span>🌍</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-geo">Geopolitics</div><div class="post-title">Bangladesh in the New World Order</div><div class="post-date">📅 April 2026</div><div class="post-text">An analysis of Bangladesh's strategic position in South Asia and how shifting global powers are reshaping opportunities for developing nations.</div></div>
+          <div class="post-body"><div class="pcat pcat-geo">Geopolitics</div><div class="ptitle">Bangladesh in the New World Order</div><div class="pdate">📅 April 2026</div><div class="ptext">Bangladesh's strategic position in South Asia and how global powers are reshaping opportunities.</div></div>
+          <div class="comments-wrap" id="cw_b2"><div class="comments-title">Comments</div><div id="cbox_b2"></div><div id="cform_b2" style="display:none;"><div class="comment-form"><input class="comment-input" id="cinput_b2" placeholder="Write a comment..."><button class="comment-btn" onclick="postComment('b2')">Post</button></div></div><div class="sign-to-comment" id="csign_b2" onclick="openAuth()">Sign in to comment</div></div>
         </div>
         <div class="post-card" data-cat="life">
           <div class="post-img" style="background:linear-gradient(135deg,#4a148c,#7b1fa2);"><span>☕</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-life">Life Stories</div><div class="post-title">Lessons from 3 Years at Catalyst</div><div class="post-date">📅 March 2026</div><div class="post-text">Three years of turning raw data into decisions taught me more about people than about numbers. Here is what I truly learned.</div></div>
-        </div>
-        <div class="post-card" data-cat="geo">
-          <div class="post-img" style="background:linear-gradient(135deg,#b71c1c,#e53935);"><span>⚖️</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-geo">Geopolitics</div><div class="post-title">The Data Economy & Global Power</div><div class="post-date">📅 February 2026</div><div class="post-text">How data has become the new oil and why nations that control information pipelines will dominate the next century.</div></div>
+          <div class="post-body"><div class="pcat pcat-life">Life Stories</div><div class="ptitle">Lessons from 3 Years at Catalyst</div><div class="pdate">📅 March 2026</div><div class="ptext">Three years of data work taught me more about people than numbers.</div></div>
+          <div class="comments-wrap" id="cw_b3"><div class="comments-title">Comments</div><div id="cbox_b3"></div><div id="cform_b3" style="display:none;"><div class="comment-form"><input class="comment-input" id="cinput_b3" placeholder="Write a comment..."><button class="comment-btn" onclick="postComment('b3')">Post</button></div></div><div class="sign-to-comment" id="csign_b3" onclick="openAuth()">Sign in to comment</div></div>
         </div>
       </div>
-      <div class="post-form-section">
-        <div class="post-form-title">✍️ Write a New Blog Post</div>
-        <div class="post-form">
-          <div class="fg"><label>Category</label>
-            <select id="blogCat">
-              <option value="life">🌱 Life Stories</option>
-              <option value="geo">🌍 Geopolitics</option>
-            </select>
-          </div>
-          <div class="fg"><label>Title</label><input type="text" id="blogTitle" placeholder="e.g. What I learned this year..."></div>
-          <div class="fg"><label>Date</label><input type="text" id="blogDate" placeholder="e.g. May 2026"></div>
-          <div class="fg"><label>Your Story</label><textarea id="blogText" rows="5" placeholder="Write your blog post here..."></textarea></div>
-          <div class="fg"><label>Cover Photo (optional)</label><input type="file" id="blogPhoto" accept="image/*"></div>
-          <button class="btn-g" onclick="addPost('blog')">Publish Post →</button>
+      <!-- ADMIN ONLY FORM -->
+      <div class="pform-wrap" id="blogWriteForm" style="display:none;">
+        <div class="pform-title">✍️ Write a New Post</div>
+        <div class="pform">
+          <div class="pfield"><label>Category</label><select id="bCat"><option value="life">🌱 Life Stories</option><option value="geo">🌍 Geopolitics</option></select></div>
+          <div class="pfield"><label>Title</label><input type="text" id="bTitle" placeholder="Post title..."></div>
+          <div class="pfield"><label>Date</label><input type="text" id="bDate" placeholder="May 2026"></div>
+          <div class="pfield"><label>Content</label><textarea id="bText" rows="5" placeholder="Write your post..."></textarea></div>
+          <div class="pfield"><label>Cover Photo</label><input type="file" id="bPhoto" accept="image/*"></div>
+          <button class="btn-green" onclick="publishPost()">Publish Post →</button>
         </div>
+      </div>
+      <!-- LOGIN PROMPT for non-admins -->
+      <div id="blogLoginPrompt" style="display:none;background:#f0ece4;border-radius:10px;padding:20px;text-align:center;margin-top:16px;">
+        <div style="font-size:24px;margin-bottom:8px;">✍️</div>
+        <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:6px;">Want to join the conversation?</div>
+        <div style="font-size:13px;color:#6b7280;margin-bottom:14px;">Sign in to comment on posts</div>
+        <button class="btn-green" onclick="openAuth()">Sign In / Sign Up</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════ MEMORIES ═══════ -->
-
+<!-- MEMORIES PAGE -->
 <div class="page" id="page-memories">
   <div class="inner-page">
-    <div class="page-hero">
-      <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
-      <div class="page-badge">University Life</div>
-      <div class="page-title">My <em>Memories</em></div>
-      <div class="page-sub">Stories and photos from my university journey at PCIU.</div>
+    <div class="page-head">
+      <button class="back-btn" onclick="goHome()">← Back</button>
+      <div class="pbadge">University Life</div>
+      <div class="ptop-title">My <em>Memories</em></div>
+      <div class="ptop-sub">Stories and photos from my university journey at PCIU.</div>
     </div>
     <div class="page-body">
-      <div class="notice-banner">
-        <div class="notice-icon">📸</div>
-        <div><div class="notice-title">Your Memory Wall</div><div class="notice-desc">Share photos and stories from your university life. Each post can include a picture, title, date and your story.</div></div>
-      </div>
+      <div class="notice"><div class="notice-icon">📸</div><div><div class="notice-title">Memory Wall</div><div class="notice-desc">Photos and stories from university life — add yours below.</div></div></div>
       <div id="memList">
-        <div class="post-card" data-cat="mem">
-          <div class="post-img" style="background:linear-gradient(135deg,#1a6b4a,#2d9e6e);"><span>🎓</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-mem">Graduation</div><div class="post-title">Graduation Day — The Best Day</div><div class="post-date">📅 April 2021</div><div class="post-text">Four years of hard work all came down to this one beautiful moment. Walking across that stage with a CGPA of 3.55 felt surreal. This is just the beginning.</div></div>
-        </div>
-        <div class="post-card" data-cat="mem">
-          <div class="post-img" style="background:linear-gradient(135deg,#0d47a1,#1976d2);"><span>🤖</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-mem">Hackathon</div><div class="post-title">PCIU Hackathon 2018 — Face Recognition</div><div class="post-date">📅 November 2018</div><div class="post-text">Built a Face Detection system using CNN with VGG16. Staying up all night debugging code, fueled by tea and determination. The moment it worked — pure magic.</div></div>
-        </div>
-        <div class="post-card" data-cat="mem">
-          <div class="post-img" style="background:linear-gradient(135deg,#e65100,#f57c00);"><span>🎮</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-mem">Workshop</div><div class="post-title">Game Development Workshop</div><div class="post-date">📅 July 2018</div><div class="post-text">Attended a Game Dev workshop at PCIU that opened my eyes to the creative side of technology. Learning how code creates entire worlds was truly inspiring.</div></div>
-        </div>
+        <div class="post-card" data-cat="mem"><div class="post-img" style="background:linear-gradient(135deg,#1a6b4a,#2d9e6e);"><span>🎓</span></div><div class="post-body"><div class="pcat pcat-mem">Graduation</div><div class="ptitle">Graduation Day — April 2021</div><div class="pdate">📅 April 2021</div><div class="ptext">Four years of hard work. Walking across that stage with a CGPA of 3.55 felt surreal. This is just the beginning.</div></div></div>
+        <div class="post-card" data-cat="mem"><div class="post-img" style="background:linear-gradient(135deg,#0d47a1,#1976d2);"><span>🤖</span></div><div class="post-body"><div class="pcat pcat-mem">Hackathon</div><div class="ptitle">PCIU Hackathon 2018</div><div class="pdate">📅 November 2018</div><div class="ptext">Built a Face Detection system using CNN with VGG16. Staying up all night debugging. The moment it worked — pure magic.</div></div></div>
+        <div class="post-card" data-cat="mem"><div class="post-img" style="background:linear-gradient(135deg,#e65100,#f57c00);"><span>🎮</span></div><div class="post-body"><div class="pcat pcat-mem">Workshop</div><div class="ptitle">Game Dev Workshop 2018</div><div class="pdate">📅 July 2018</div><div class="ptext">Attended a Game Dev workshop at PCIU. Learning how code creates entire worlds was truly inspiring.</div></div></div>
       </div>
-      <div class="post-form-section">
-        <div class="post-form-title">📸 Add a New Memory</div>
-        <div class="post-form">
-          <div class="fg"><label>Category</label>
-            <select id="memCat">
-              <option value="Campus Life">Campus Life</option>
-              <option value="Hackathon">Hackathon</option>
-              <option value="Workshop">Workshop</option>
-              <option value="Friends">Friends</option>
-              <option value="Graduation">Graduation</option>
-              <option value="Study">Study</option>
-              <option value="Event">Event</option>
-            </select>
-          </div>
-          <div class="fg"><label>Title</label><input type="text" id="memTitle" placeholder="e.g. First day on campus..."></div>
-          <div class="fg"><label>Date</label><input type="text" id="memDate" placeholder="e.g. September 2019"></div>
-          <div class="fg"><label>Your Story</label><textarea id="memText" rows="4" placeholder="Write about this memory..."></textarea></div>
-          <div class="fg"><label>Photo (optional)</label><input type="file" id="memPhoto" accept="image/*"></div>
-          <button class="btn-g" onclick="addPost('mem')">Save Memory →</button>
+      <div class="pform-wrap">
+        <div class="pform-title">📸 Add a Memory</div>
+        <div class="pform">
+          <div class="pfield"><label>Category</label><select id="mCat"><option>Campus Life</option><option>Hackathon</option><option>Workshop</option><option>Friends</option><option>Graduation</option><option>Study</option><option>Event</option></select></div>
+          <div class="pfield"><label>Title</label><input type="text" id="mTitle" placeholder="Memory title..."></div>
+          <div class="pfield"><label>Date</label><input type="text" id="mDate" placeholder="e.g. September 2019"></div>
+          <div class="pfield"><label>Story</label><textarea id="mText" rows="4" placeholder="Tell the story..."></textarea></div>
+          <div class="pfield"><label>Photo</label><input type="file" id="mPhoto" accept="image/*"></div>
+          <button class="btn-green" onclick="addCard('mem')">Save Memory →</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════ ACHIEVEMENTS ═══════ -->
-
+<!-- ACHIEVEMENTS PAGE -->
 <div class="page" id="page-achievements">
   <div class="inner-page">
-    <div class="page-hero">
-      <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
-      <div class="page-badge">Recognition</div>
-      <div class="page-title">My <em>Achievements</em></div>
-      <div class="page-sub">Milestones, wins, and moments of pride.</div>
+    <div class="page-head">
+      <button class="back-btn" onclick="goHome()">← Back</button>
+      <div class="pbadge">Recognition</div>
+      <div class="ptop-title">My <em>Achievements</em></div>
+      <div class="ptop-sub">Milestones, wins, and moments of pride.</div>
     </div>
     <div class="page-body">
       <div id="achList">
-        <div class="post-card ach-featured" data-cat="ach" style="display:flex;gap:14px;align-items:flex-start;">
-          <div style="font-size:36px;flex-shrink:0;">🏆</div>
-          <div><div class="post-title" style="color:white;">Impactful Data Analysis — Catalyst Solutions</div><div class="post-text" style="color:rgba(255,255,255,0.8);">Successfully transformed raw data into actionable insights that directly supported Catalyst's strategic goals.</div><div class="ach-year ach-year-white">2022 – Present</div></div>
-        </div>
-        <div class="post-card" data-cat="ach">
-          <div class="post-img" style="background:linear-gradient(135deg,#0d47a1,#1976d2);"><span>🤖</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-ach">Hackathon</div><div class="post-title">PCIU Hackathon Participant</div><div class="post-date">📅 November 2018</div><div class="post-text">Built a Face Detection & Recognition system using CNN with VGG16 Model during university years.</div></div>
-        </div>
-        <div class="post-card" data-cat="ach">
-          <div class="post-img" style="background:linear-gradient(135deg,#1a6b4a,#2d9e6e);"><span>🎓</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-ach">Academic</div><div class="post-title">B.Sc CSE — CGPA 3.55 / 4.00</div><div class="post-date">📅 April 2021</div><div class="post-text">Graduated with distinction in Computer Science & Engineering from Port City International University, Chattogram.</div></div>
-        </div>
+        <div class="ach-top"><div style="font-size:34px;flex-shrink:0;">🏆</div><div><div class="ptitle" style="color:#fff;">Impactful Data Analysis — Catalyst Analytics</div><div class="ptext" style="color:rgba(255,255,255,0.85);">Transformed raw data into actionable insights directly supporting Catalyst's strategic goals.</div><div class="ach-yr">2022 – 2026</div></div></div>
+        <div class="post-card"><div class="post-img" style="background:linear-gradient(135deg,#0d47a1,#1976d2);"><span>🤖</span></div><div class="post-body"><div class="pcat pcat-ach">Hackathon</div><div class="ptitle">PCIU Hackathon Participant</div><div class="pdate">📅 November 2018</div><div class="ptext">Built Face Detection & Recognition using CNN with VGG16.</div></div></div>
+        <div class="post-card"><div class="post-img" style="background:linear-gradient(135deg,#1a6b4a,#2d9e6e);"><span>🎓</span></div><div class="post-body"><div class="pcat pcat-ach">Academic</div><div class="ptitle">B.Sc CSE — CGPA 3.55 / 4.00</div><div class="pdate">📅 April 2021</div><div class="ptext">Graduated with distinction from Port City International University.</div></div></div>
       </div>
-      <div class="post-form-section">
-        <div class="post-form-title">🏆 Add an Achievement</div>
-        <div class="post-form">
-          <div class="fg"><label>Category</label>
-            <select id="achCat">
-              <option value="Academic">Academic</option>
-              <option value="Work">Work</option>
-              <option value="Hackathon">Hackathon</option>
-              <option value="Certification">Certification</option>
-              <option value="Award">Award</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="fg"><label>Title</label><input type="text" id="achTitle" placeholder="e.g. Won first place in..."></div>
-          <div class="fg"><label>Date / Year</label><input type="text" id="achDate" placeholder="e.g. 2024"></div>
-          <div class="fg"><label>Description</label><textarea id="achText" rows="4" placeholder="Describe this achievement..."></textarea></div>
-          <div class="fg"><label>Photo (optional)</label><input type="file" id="achPhoto" accept="image/*"></div>
-          <button class="btn-g" onclick="addPost('ach')">Add Achievement →</button>
+      <div class="pform-wrap">
+        <div class="pform-title">🏆 Add an Achievement</div>
+        <div class="pform">
+          <div class="pfield"><label>Category</label><select id="aCat"><option>Academic</option><option>Work</option><option>Hackathon</option><option>Certification</option><option>Award</option><option>Other</option></select></div>
+          <div class="pfield"><label>Title</label><input type="text" id="aTitle" placeholder="Achievement title..."></div>
+          <div class="pfield"><label>Date</label><input type="text" id="aDate" placeholder="e.g. 2024"></div>
+          <div class="pfield"><label>Description</label><textarea id="aText" rows="4" placeholder="Describe the achievement..."></textarea></div>
+          <div class="pfield"><label>Photo</label><input type="file" id="aPhoto" accept="image/*"></div>
+          <button class="btn-green" onclick="addCard('ach')">Add Achievement →</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════ GOALS ═══════ -->
-
+<!-- GOALS PAGE -->
 <div class="page" id="page-goals">
   <div class="inner-page">
-    <div class="page-hero">
-      <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
-      <div class="page-badge">Vision</div>
-      <div class="page-title">My <em>Goals</em></div>
-      <div class="page-sub">Where I'm headed and what I'm working towards.</div>
+    <div class="page-head">
+      <button class="back-btn" onclick="goHome()">← Back</button>
+      <div class="pbadge">Vision</div>
+      <div class="ptop-title">My <em>Goals</em></div>
+      <div class="ptop-sub">Where I'm headed and what I'm working towards.</div>
     </div>
     <div class="page-body">
       <div id="goalList">
-        <div class="post-card" data-cat="goal">
-          <div class="post-img" style="background:linear-gradient(135deg,#1a6b4a,#2d9e6e);"><span>💼</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-goal">Career</div><div class="post-title">Land a Senior Data Role</div><div class="post-date">📅 Target: 2026</div><div class="post-text">Secure a Senior Data Analyst or Data Manager position at a reputable organization where I can lead data strategy and mentor others.</div><div class="goal-status goal-ongoing">● Actively Pursuing</div><div class="goal-prog-label">Progress</div><div class="goal-prog-bar"><div class="goal-prog-fill" style="width:60%"></div></div></div>
-        </div>
-        <div class="post-card" data-cat="goal">
-          <div class="post-img" style="background:linear-gradient(135deg,#0d47a1,#1976d2);"><span>📊</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-goal">Skills</div><div class="post-title">Master Python for Data Science</div><div class="post-date">📅 Target: 2026</div><div class="post-text">Build strong Python skills with pandas, numpy, and machine learning libraries to expand my data toolkit beyond Excel and Sheets.</div><div class="goal-status goal-ongoing">● In Progress</div><div class="goal-prog-label">Progress</div><div class="goal-prog-bar"><div class="goal-prog-fill" style="width:35%"></div></div></div>
-        </div>
-        <div class="post-card" data-cat="goal">
-          <div class="post-img" style="background:linear-gradient(135deg,#4a148c,#7b1fa2);"><span>🎓</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-goal">Learning</div><div class="post-title">Earn a Data Analytics Certification</div><div class="post-date">📅 Target: 2027</div><div class="post-text">Complete Google Data Analytics or IBM Data Science Professional Certificate to formalize and validate my skills internationally.</div><div class="goal-status goal-planned">● Planned</div></div>
-        </div>
-        <div class="post-card" data-cat="goal">
-          <div class="post-img" style="background:linear-gradient(135deg,#e65100,#f57c00);"><span>🌍</span></div>
-          <div class="post-body"><div class="post-cat-tag tag-goal">Vision</div><div class="post-title">Work Internationally</div><div class="post-date">📅 Long-Term</div><div class="post-text">Gain experience working with an international team or organization, bringing Bangladeshi data talent to the global stage.</div><div class="goal-status goal-planned">● Long-Term Goal</div></div>
-        </div>
+        <div class="post-card"><div class="post-img" style="background:linear-gradient(135deg,#1a6b4a,#2d9e6e);"><span>💼</span></div><div class="post-body"><div class="pcat pcat-goal">Career</div><div class="ptitle">Land a Senior Data Role</div><div class="pdate">📅 Target: 2026</div><div class="ptext">Secure a Senior Data Analyst or Manager position to lead data strategy.</div><div class="goal-st gst-on">● Actively Pursuing</div><div class="gpbar"><div class="gpfill" style="width:60%"></div></div></div></div>
+        <div class="post-card"><div class="post-img" style="background:linear-gradient(135deg,#0d47a1,#1976d2);"><span>📊</span></div><div class="post-body"><div class="pcat pcat-goal">Skills</div><div class="ptitle">Master Python for Data Science</div><div class="pdate">📅 Target: 2026</div><div class="ptext">Build strong Python skills — pandas, numpy, and ML libraries.</div><div class="goal-st gst-on">● In Progress</div><div class="gpbar"><div class="gpfill" style="width:35%"></div></div></div></div>
+        <div class="post-card"><div class="post-img" style="background:linear-gradient(135deg,#4a148c,#7b1fa2);"><span>🎓</span></div><div class="post-body"><div class="pcat pcat-goal">Learning</div><div class="ptitle">Earn a Data Analytics Certification</div><div class="pdate">📅 Target: 2027</div><div class="ptext">Complete Google or IBM Data Analytics certification.</div><div class="goal-st gst-pl">● Planned</div></div></div>
+        <div class="post-card"><div class="post-img" style="background:linear-gradient(135deg,#e65100,#f57c00);"><span>🌍</span></div><div class="post-body"><div class="pcat pcat-goal">Vision</div><div class="ptitle">Work Internationally</div><div class="pdate">📅 Long-Term</div><div class="ptext">Gain international experience and bring Bangladeshi talent to global stage.</div><div class="goal-st gst-pl">● Long-Term Goal</div></div></div>
       </div>
-      <div class="post-form-section">
-        <div class="post-form-title">🎯 Add a New Goal</div>
-        <div class="post-form">
-          <div class="fg"><label>Category</label>
-            <select id="goalCat">
-              <option value="Career">Career</option>
-              <option value="Skills">Skills</option>
-              <option value="Learning">Learning</option>
-              <option value="Personal">Personal</option>
-              <option value="Financial">Financial</option>
-              <option value="Vision">Vision</option>
-            </select>
-          </div>
-          <div class="fg"><label>Goal Title</label><input type="text" id="goalTitle" placeholder="e.g. Learn Python by end of year..."></div>
-          <div class="fg"><label>Target Date</label><input type="text" id="goalDate" placeholder="e.g. December 2026"></div>
-          <div class="fg"><label>Status</label>
-            <select id="goalStatus">
-              <option value="ongoing">● Actively Pursuing</option>
-              <option value="planned">● Planned</option>
-              <option value="achieved">● Achieved</option>
-            </select>
-          </div>
-          <div class="fg"><label>Description</label><textarea id="goalText" rows="4" placeholder="Describe your goal..."></textarea></div>
-          <div class="fg"><label>Photo (optional)</label><input type="file" id="goalPhoto" accept="image/*"></div>
-          <button class="btn-g" onclick="addPost('goal')">Add Goal →</button>
+      <div class="pform-wrap">
+        <div class="pform-title">🎯 Add a Goal</div>
+        <div class="pform">
+          <div class="pfield"><label>Category</label><select id="gCat"><option>Career</option><option>Skills</option><option>Learning</option><option>Personal</option><option>Financial</option><option>Vision</option></select></div>
+          <div class="pfield"><label>Goal Title</label><input type="text" id="gTitle" placeholder="Goal title..."></div>
+          <div class="pfield"><label>Target Date</label><input type="text" id="gDate" placeholder="e.g. December 2026"></div>
+          <div class="pfield"><label>Status</label><select id="gStatus"><option value="on">Actively Pursuing</option><option value="pl">Planned</option><option value="dn">Achieved</option></select></div>
+          <div class="pfield"><label>Description</label><textarea id="gText" rows="4" placeholder="Describe your goal..."></textarea></div>
+          <div class="pfield"><label>Photo</label><input type="file" id="gPhoto" accept="image/*"></div>
+          <button class="btn-green" onclick="addCard('goal')">Add Goal →</button>
         </div>
       </div>
     </div>
@@ -651,197 +685,285 @@ footer{flex-direction:row;justify-content:space-between;padding:22px 8%;}
 </div>
 
 <script>
-// PAGE NAVIGATION
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-  document.getElementById('page-' + name).classList.add('active');
-  window.scrollTo(0, 0);
-  closeMobileMenu();
-}
+var ADMIN = 'cse.antar.hossain@gmail.com';
+var APASS = 'Antar@2024';
 
-function goSection(id) {
+function getUsers(){try{return JSON.parse(localStorage.getItem('ah_u')||'[]');}catch(e){return[];}}
+function saveUsers(u){localStorage.setItem('ah_u',JSON.stringify(u));}
+function getMe(){try{return JSON.parse(sessionStorage.getItem('ah_me')||'null');}catch(e){return null;}}
+function setMe(u){if(u)sessionStorage.setItem('ah_me',JSON.stringify(u));else sessionStorage.removeItem('ah_me');}
+function isAdmin(){var u=getMe();return u&&u.email===ADMIN;}
+function loggedIn(){return getMe()!==null;}
+
+function getComments(id){try{return JSON.parse(localStorage.getItem('cmt_'+id)||'[]');}catch(e){return[];}}
+function saveComments(id,c){localStorage.setItem('cmt_'+id,JSON.stringify(c));}
+
+/* PAGE NAV */
+function goHome(){showPage('home');}
+function goPage(p){showPage(p);}
+function showPage(p){
+  document.querySelectorAll('.page').forEach(function(el){el.classList.remove('active');});
+  var pg = document.getElementById('page-'+p);
+  if(pg) pg.classList.add('active');
+  window.scrollTo(0,0);
+  closeMMenu();
+  if(p==='blog') refreshBlogUI();
+}
+function goSec(id){
   showPage('home');
-  setTimeout(function() {
-    var el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }, 100);
+  setTimeout(function(){
+    var el=document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth'});
+  },120);
 }
 
-function navGo(page, section) {
-  if (page === 'home' && section) {
-    goSection(section);
-  } else {
-    showPage(page);
+/* MENU */
+function toggleMenu(){
+  var m=document.getElementById('mmenu');
+  var b=document.getElementById('hamBtn');
+  var open=m.classList.contains('open');
+  if(open){m.classList.remove('open');b.classList.remove('open');}
+  else{m.classList.add('open');b.classList.add('open');}
+}
+function closeMMenu(){
+  document.getElementById('mmenu').classList.remove('open');
+  document.getElementById('hamBtn').classList.remove('open');
+}
+
+/* USER DROPDOWN */
+function toggleUMenu(){
+  var d=document.getElementById('udropdown');
+  d.classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  var nu=document.getElementById('navUser');
+  var d=document.getElementById('udropdown');
+  if(d&&d.classList.contains('open')&&nu&&!nu.contains(e.target)) d.classList.remove('open');
+});
+
+/* AUTH MODAL */
+function openAuth(){document.getElementById('authOverlay').classList.add('open');setTab('login');}
+function closeAuth(){document.getElementById('authOverlay').classList.remove('open');}
+function setTab(t){
+  document.getElementById('formLogin').style.display=t==='login'?'block':'none';
+  document.getElementById('formSignup').style.display=t==='signup'?'block':'none';
+  document.getElementById('tabLogin').className='auth-tab'+(t==='login'?' active':'');
+  document.getElementById('tabSignup').className='auth-tab'+(t==='signup'?' active':'');
+  document.getElementById('lErr').style.display='none';
+  document.getElementById('sErr').style.display='none';
+  document.getElementById('sOk').style.display='none';
+}
+
+function doLogin(){
+  var email=document.getElementById('lEmail').value.trim().toLowerCase();
+  var pass=document.getElementById('lPass').value;
+  var err=document.getElementById('lErr');
+  if(!email||!pass){err.textContent='Fill in all fields.';err.style.display='block';return;}
+  if(email===ADMIN.toLowerCase()&&pass===APASS){
+    setMe({name:'Antar Hossain',email:ADMIN,role:'admin'});
+    closeAuth();updateUI();return;
   }
-  closeMobileMenu();
+  var users=getUsers();
+  var found=null;
+  for(var i=0;i<users.length;i++){if(users[i].email===email&&users[i].pass===pass){found=users[i];break;}}
+  if(found){setMe({name:found.name,email:found.email,role:'user'});closeAuth();updateUI();}
+  else{err.textContent='Incorrect email or password.';err.style.display='block';}
 }
 
-// HAMBURGER
-function toggleMenu() {
-  var menu = document.getElementById('mobileMenu');
-  var btn = document.getElementById('ham');
-  var isOpen = menu.classList.contains('open');
-  if (isOpen) {
-    menu.classList.remove('open');
-    btn.classList.remove('open');
+function doSignup(){
+  var name=document.getElementById('sName').value.trim();
+  var email=document.getElementById('sEmail').value.trim().toLowerCase();
+  var pass=document.getElementById('sPass').value;
+  var err=document.getElementById('sErr');
+  var ok=document.getElementById('sOk');
+  err.style.display='none';ok.style.display='none';
+  if(!name||!email||!pass){err.textContent='Fill in all fields.';err.style.display='block';return;}
+  if(pass.length<6){err.textContent='Password min 6 characters.';err.style.display='block';return;}
+  if(email===ADMIN.toLowerCase()){err.textContent='Email not available.';err.style.display='block';return;}
+  var users=getUsers();
+  for(var i=0;i<users.length;i++){if(users[i].email===email){err.textContent='Email already registered.';err.style.display='block';return;}}
+  users.push({name:name,email:email,pass:pass});
+  saveUsers(users);
+  ok.textContent='Account created! You can sign in now.';ok.style.display='block';
+  document.getElementById('sName').value='';
+  document.getElementById('sEmail').value='';
+  document.getElementById('sPass').value='';
+  setTimeout(function(){setTab('login');},1600);
+}
+
+function doLogout(){setMe(null);updateUI();showPage('home');}
+
+function updateUI(){
+  var me=getMe();
+  var authBtn=document.getElementById('navAuthBtn');
+  var navUser=document.getElementById('navUser');
+  var mmSignIn=document.getElementById('mmSignIn');
+  var mmSignOut=document.getElementById('mmSignOut');
+
+  if(me){
+    authBtn.style.display='none';
+    navUser.style.display='block';
+    var av=document.getElementById('uavatar');
+    av.textContent=me.name.charAt(0).toUpperCase();
+    av.style.background=isAdmin()?'#1a6b4a':'#0d47a1';
+    document.getElementById('uname-main').textContent=me.name;
+    document.getElementById('uname-role').textContent=isAdmin()?'👑 Admin':'Member';
+    mmSignIn.style.display='none';
+    mmSignOut.style.display='block';
   } else {
-    menu.classList.add('open');
-    btn.classList.add('open');
+    authBtn.style.display='block';
+    navUser.style.display='none';
+    mmSignIn.style.display='block';
+    mmSignOut.style.display='none';
   }
-}
-function closeMobileMenu() {
-  document.getElementById('mobileMenu').classList.remove('open');
-  document.getElementById('ham').classList.remove('open');
+
+  refreshBlogUI();
+  refreshCommentForms();
 }
 
-// FILTER POSTS
-function filterPosts(listId, cat, btn) {
-  var btns = btn.parentElement.querySelectorAll('.tab-btn');
-  btns.forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  var list = document.getElementById(listId);
-  list.querySelectorAll('.post-card').forEach(function(card) {
-    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+function refreshBlogUI(){
+  var writeForm=document.getElementById('blogWriteForm');
+  var loginPrompt=document.getElementById('blogLoginPrompt');
+  if(!writeForm) return;
+  if(isAdmin()){writeForm.style.display='block';if(loginPrompt)loginPrompt.style.display='none';}
+  else if(loggedIn()){writeForm.style.display='none';if(loginPrompt)loginPrompt.style.display='none';}
+  else{writeForm.style.display='none';if(loginPrompt)loginPrompt.style.display='block';}
+}
+
+function refreshCommentForms(){
+  var postIds=['b1','b2','b3'];
+  postIds.forEach(function(id){
+    var form=document.getElementById('cform_'+id);
+    var sign=document.getElementById('csign_'+id);
+    if(form) form.style.display=loggedIn()?'block':'none';
+    if(sign) sign.style.display=loggedIn()?'none':'block';
+    renderComments(id);
   });
 }
 
-// CONFIG FOR EACH SECTION
-var configs = {
-  blog: {
-    listId: 'blogList',
-    catId: 'blogCat',
-    titleId: 'blogTitle',
-    dateId: 'blogDate',
-    textId: 'blogText',
-    photoId: 'blogPhoto',
-    hasStatus: false,
-    tagClass: function(cat) { return cat === 'life' ? 'tag-life' : 'tag-geo'; },
-    tagLabel: function(cat) { return cat === 'life' ? 'Life Stories' : 'Geopolitics'; },
-    colors: {
-      life: ['linear-gradient(135deg,#1a6b4a,#2d9e6e)', 'linear-gradient(135deg,#4a148c,#7b1fa2)', 'linear-gradient(135deg,#e65100,#f57c00)'],
-      geo:  ['linear-gradient(135deg,#0d47a1,#1976d2)', 'linear-gradient(135deg,#b71c1c,#e53935)', 'linear-gradient(135deg,#004d40,#00796b)']
-    },
-    emojis: { life: ['🌱','☕','✨','💭','🌟'], geo: ['🌍','⚖️','🗺️','📰','🔍'] }
-  },
-  mem: {
-    listId: 'memList',
-    catId: 'memCat',
-    titleId: 'memTitle',
-    dateId: 'memDate',
-    textId: 'memText',
-    photoId: 'memPhoto',
-    hasStatus: false,
-    tagClass: function() { return 'tag-mem'; },
-    tagLabel: function(cat) { return cat; },
-    colors: {
-      default: ['linear-gradient(135deg,#1a6b4a,#2d9e6e)', 'linear-gradient(135deg,#0d47a1,#1976d2)', 'linear-gradient(135deg,#4a148c,#7b1fa2)', 'linear-gradient(135deg,#e65100,#f57c00)', 'linear-gradient(135deg,#880e4f,#c2185b)']
-    },
-    emojis: { default: ['📸','🎓','🤝','✨','🌟','💡','🎉','🏫','☕','🌸'] }
-  },
-  ach: {
-    listId: 'achList',
-    catId: 'achCat',
-    titleId: 'achTitle',
-    dateId: 'achDate',
-    textId: 'achText',
-    photoId: 'achPhoto',
-    hasStatus: false,
-    tagClass: function() { return 'tag-ach'; },
-    tagLabel: function(cat) { return cat; },
-    colors: {
-      default: ['linear-gradient(135deg,#e8a838,#f57c00)', 'linear-gradient(135deg,#1a6b4a,#2d9e6e)', 'linear-gradient(135deg,#0d47a1,#1976d2)', 'linear-gradient(135deg,#4a148c,#7b1fa2)']
-    },
-    emojis: { default: ['🏆','⭐','🥇','🎖️','🌟','💡','🚀'] }
-  },
-  goal: {
-    listId: 'goalList',
-    catId: 'goalCat',
-    titleId: 'goalTitle',
-    dateId: 'goalDate',
-    textId: 'goalText',
-    photoId: 'goalPhoto',
-    statusId: 'goalStatus',
-    hasStatus: true,
-    tagClass: function() { return 'tag-goal'; },
-    tagLabel: function(cat) { return cat; },
-    colors: {
-      default: ['linear-gradient(135deg,#1a6b4a,#2d9e6e)', 'linear-gradient(135deg,#0d47a1,#1976d2)', 'linear-gradient(135deg,#4a148c,#7b1fa2)', 'linear-gradient(135deg,#e65100,#f57c00)']
-    },
-    emojis: { default: ['🎯','💼','📊','🎓','🌍','✍️','🏠','💡'] }
-  }
-};
-
-// ADD POST — universal function
-function addPost(type) {
-  var c = configs[type];
-  var cat    = document.getElementById(c.catId).value;
-  var title  = document.getElementById(c.titleId).value.trim();
-  var date   = document.getElementById(c.dateId).value.trim();
-  var text   = document.getElementById(c.textId).value.trim();
-  var photo  = document.getElementById(c.photoId).files[0];
-  var status = c.hasStatus ? document.getElementById(c.statusId).value : null;
-
-  if (!title || !text) { alert('Please add a title and description!'); return; }
-
-  // Pick color & emoji
-  var colorArr = c.colors[cat] || c.colors['default'];
-  var emojiArr = c.emojis[cat] || c.emojis['default'];
-  var bg    = colorArr[Math.floor(Math.random() * colorArr.length)];
-  var emoji = emojiArr[Math.floor(Math.random() * emojiArr.length)];
-
-  var statusHTML = '';
-  if (c.hasStatus && status) {
-    var statusMap = {
-      ongoing:  '<div class="goal-status goal-ongoing">● Actively Pursuing</div>',
-      planned:  '<div class="goal-status goal-planned">● Planned</div>',
-      achieved: '<div class="goal-status goal-achieved">● Achieved</div>'
-    };
-    statusHTML = statusMap[status] || '';
-  }
-
-  function buildCard(imgHTML) {
-    var card = document.createElement('div');
-    card.className = 'post-card fadein';
-    card.dataset.cat = cat;
-    card.innerHTML =
-      '<div class="post-img" style="background:' + bg + ';">' + imgHTML + '</div>' +
-      '<div class="post-body">' +
-        '<div class="post-cat-tag ' + c.tagClass(cat) + '">' + c.tagLabel(cat) + '</div>' +
-        '<div class="post-title">' + title + '</div>' +
-        (date ? '<div class="post-date">📅 ' + date + '</div>' : '') +
-        '<div class="post-text">' + text + '</div>' +
-        statusHTML +
-      '</div>';
-
-    var list = document.getElementById(c.listId);
-    list.insertBefore(card, list.firstChild);
-
-    // Reset inputs
-    document.getElementById(c.titleId).value = '';
-    document.getElementById(c.dateId).value  = '';
-    document.getElementById(c.textId).value  = '';
-    document.getElementById(c.photoId).value = '';
-
-    // Scroll to new post
-    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  if (photo) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      buildCard('<img src="' + e.target.result + '" alt="' + title + '"><span style="display:none">' + emoji + '</span>');
-    };
-    reader.readAsDataURL(photo);
-  } else {
-    buildCard('<span>' + emoji + '</span>');
-  }
+function renderComments(id){
+  var box=document.getElementById('cbox_'+id);
+  if(!box) return;
+  var cmts=getComments(id);
+  if(cmts.length===0){box.innerHTML='<div style="font-size:13px;color:#6b7280;padding:4px 0;">No comments yet.</div>';return;}
+  box.innerHTML=cmts.map(function(c){
+    return '<div class="comment-item"><span class="comment-author">'+c.user+'</span><span class="comment-date">'+c.date+'</span><div class="comment-text">'+c.text+'</div></div>';
+  }).join('');
 }
 
-// NAV SCROLL
-window.addEventListener('scroll', function() {
-  document.querySelector('nav').style.boxShadow = window.scrollY > 40 ? '0 2px 12px rgba(0,0,0,0.08)' : 'none';
+function postComment(id){
+  var me=getMe();
+  if(!me){openAuth();return;}
+  var inp=document.getElementById('cinput_'+id);
+  var text=inp?inp.value.trim():'';
+  if(!text) return;
+  var cmts=getComments(id);
+  cmts.push({user:me.name,text:text,date:new Date().toLocaleDateString()});
+  saveComments(id,cmts);
+  inp.value='';
+  renderComments(id);
+}
+
+/* PUBLISH BLOG (admin only) */
+function publishPost(){
+  if(!isAdmin()){alert('Admin only.');return;}
+  var cat=document.getElementById('bCat').value;
+  var title=document.getElementById('bTitle').value.trim();
+  var date=document.getElementById('bDate').value.trim();
+  var text=document.getElementById('bText').value.trim();
+  var photo=document.getElementById('bPhoto').files[0];
+  if(!title||!text){alert('Add title and content.');return;}
+  var colors={life:'linear-gradient(135deg,#1a6b4a,#2d9e6e)',geo:'linear-gradient(135deg,#0d47a1,#1976d2)'};
+  var emojis={life:['🌱','☕','✨','💭'],geo:['🌍','⚖️','🗺️','📰']};
+  var bg=colors[cat];
+  var em=emojis[cat][Math.floor(Math.random()*emojis[cat].length)];
+  var catLabel=cat==='life'?'Life Stories':'Geopolitics';
+  var catClass=cat==='life'?'pcat-life':'pcat-geo';
+  var pid='b'+Date.now();
+
+  function makeCard(imgHTML){
+    var card=document.createElement('div');
+    card.className='post-card fadein';
+    card.dataset.cat=cat;
+    card.innerHTML='<div class="post-img" style="background:'+bg+';">'+imgHTML+'</div>'
+      +'<div class="post-body"><div class="pcat '+catClass+'">'+catLabel+'</div>'
+      +'<div class="ptitle">'+title+'</div>'
+      +(date?'<div class="pdate">📅 '+date+'</div>':'')
+      +'<div class="ptext">'+text+'</div></div>'
+      +'<div class="comments-wrap"><div class="comments-title">Comments</div>'
+      +'<div id="cbox_'+pid+'"></div>'
+      +'<div id="cform_'+pid+'" style="display:none;"><div class="comment-form">'
+      +'<input class="comment-input" id="cinput_'+pid+'" placeholder="Write a comment...">'
+      +'<button class="comment-btn" onclick="postComment(\''+pid+'\')">Post</button>'
+      +'</div></div>'
+      +'<div class="sign-to-comment" id="csign_'+pid+'" onclick="openAuth()">Sign in to comment</div>'
+      +'</div>';
+    var list=document.getElementById('blogList');
+    list.insertBefore(card,list.firstChild);
+    document.getElementById('bTitle').value='';
+    document.getElementById('bDate').value='';
+    document.getElementById('bText').value='';
+    document.getElementById('bPhoto').value='';
+    renderComments(pid);
+    refreshCommentForms();
+  }
+  if(photo){var r=new FileReader();r.onload=function(e){makeCard('<img src="'+e.target.result+'" alt="'+title+'"><span style="display:none">'+em+'</span>');};r.readAsDataURL(photo);}
+  else{makeCard('<span>'+em+'</span>');}
+}
+
+/* ADD CARDS (memories, achievements, goals) */
+function addCard(type){
+  var cfg={
+    mem:{listId:'memList',catId:'mCat',titleId:'mTitle',dateId:'mDate',textId:'mText',photoId:'mPhoto',catClass:'pcat-mem',colors:['linear-gradient(135deg,#1a6b4a,#2d9e6e)','linear-gradient(135deg,#0d47a1,#1976d2)','linear-gradient(135deg,#4a148c,#7b1fa2)','linear-gradient(135deg,#e65100,#f57c00)'],emojis:['📸','🎓','🤝','✨','🌟','💡']},
+    ach:{listId:'achList',catId:'aCat',titleId:'aTitle',dateId:'aDate',textId:'aText',photoId:'aPhoto',catClass:'pcat-ach',colors:['linear-gradient(135deg,#e8a838,#f57c00)','linear-gradient(135deg,#1a6b4a,#2d9e6e)','linear-gradient(135deg,#0d47a1,#1976d2)'],emojis:['🏆','⭐','🥇','🎖️','🌟']},
+    goal:{listId:'goalList',catId:'gCat',titleId:'gTitle',dateId:'gDate',textId:'gText',photoId:'gPhoto',catClass:'pcat-goal',colors:['linear-gradient(135deg,#1a6b4a,#2d9e6e)','linear-gradient(135deg,#0d47a1,#1976d2)','linear-gradient(135deg,#4a148c,#7b1fa2)','linear-gradient(135deg,#e65100,#f57c00)'],emojis:['🎯','💼','📊','🎓','🌍']}
+  };
+  var c=cfg[type];
+  var cat=document.getElementById(c.catId).value;
+  var title=document.getElementById(c.titleId).value.trim();
+  var date=document.getElementById(c.dateId).value.trim();
+  var text=document.getElementById(c.textId).value.trim();
+  var photo=document.getElementById(c.photoId).files[0];
+  if(!title||!text){alert('Add title and description.');return;}
+  var bg=c.colors[Math.floor(Math.random()*c.colors.length)];
+  var em=c.emojis[Math.floor(Math.random()*c.emojis.length)];
+  var statusHTML='';
+  if(type==='goal'){var stMap={on:'<div class="goal-st gst-on">● Actively Pursuing</div>',pl:'<div class="goal-st gst-pl">● Planned</div>',dn:'<div class="goal-st gst-dn">● Achieved</div>'};statusHTML=stMap[document.getElementById('gStatus').value]||'';}
+  function build(imgHTML){
+    var card=document.createElement('div');
+    card.className='post-card fadein';
+    card.dataset.cat=type;
+    card.innerHTML='<div class="post-img" style="background:'+bg+';">'+imgHTML+'</div>'
+      +'<div class="post-body"><div class="pcat '+c.catClass+'">'+cat+'</div>'
+      +'<div class="ptitle">'+title+'</div>'
+      +(date?'<div class="pdate">📅 '+date+'</div>':'')
+      +'<div class="ptext">'+text+'</div>'+statusHTML+'</div>';
+    var list=document.getElementById(c.listId);
+    list.insertBefore(card,list.firstChild);
+    document.getElementById(c.titleId).value='';
+    document.getElementById(c.dateId).value='';
+    document.getElementById(c.textId).value='';
+    document.getElementById(c.photoId).value='';
+  }
+  if(photo){var r=new FileReader();r.onload=function(e){build('<img src="'+e.target.result+'" alt="'+title+'"><span style="display:none">'+em+'</span>');};r.readAsDataURL(photo);}
+  else{build('<span>'+em+'</span>');}
+}
+
+/* FILTER */
+function filterList(listId,cat,btn){
+  var btns=btn.parentElement.querySelectorAll('.tbtn');
+  btns.forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.querySelectorAll('#'+listId+' .post-card').forEach(function(c){
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';
+  });
+}
+
+/* INIT */
+window.addEventListener('load',function(){
+  updateUI();
+  renderComments('b1');renderComments('b2');renderComments('b3');
 });
 </script>
-
 </body>
 </html>
